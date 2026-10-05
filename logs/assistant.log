@@ -1,0 +1,148 @@
+2026-10-05 18:21:39 | DEBUG    | UniversityAssistant | Attempting Redis connection to localhost:6379
+2026-10-05 18:21:39 | INFO     | UniversityAssistant | ✓ Redis connection established
+2026-10-05 18:21:39 | INFO     | UniversityAssistant | Redis connected successfully to localhost:6379
+2026-10-05 18:21:39 | WARNING  | UniversityAssistant | OpenAI API key not configured - web search disabled
+2026-10-05 18:21:39 | INFO     | UniversityAssistant | Loaded 72 valid resources
+2026-10-05 18:21:39 | INFO     | UniversityAssistant | ExtractorService initialized | pdfplumber: True | PyPDF2: True | HTTP: True
+2026-10-05 18:21:39 | WARNING  | UniversityAssistant | Embeddings API key not configured — set OPENAI_API_KEY in .env
+2026-10-05 18:21:39 | INFO     | UniversityAssistant | 
+============================================================
+2026-10-05 18:21:39 | INFO     | UniversityAssistant | 🚀 UNIVERSITY ASSISTANT SYSTEM STARTING
+2026-10-05 18:21:39 | INFO     | UniversityAssistant | 📅 2026-10-05 18:21:39
+2026-10-05 18:21:39 | INFO     | UniversityAssistant | ============================================================
+2026-10-05 18:21:39 | INFO     | UniversityAssistant | ⚙️ System Configuration:
+2026-10-05 18:21:39 | INFO     | UniversityAssistant |   → Redis: ✓ Connected
+2026-10-05 18:21:39 | INFO     | UniversityAssistant |   → OpenAI: ✗ Not Configured
+2026-10-05 18:21:39 | INFO     | UniversityAssistant | ============================================================
+
+2026-10-05 18:21:39 | INFO     | UniversityAssistant | 📊 Similarity Threshold: 0.7
+2026-10-05 18:21:39 | INFO     | UniversityAssistant | 🔄 WORKFLOW: Query → Embeddings → Redis Cache → PDF/Web Extract → Answer
+2026-10-05 18:21:39 | INFO     | UniversityAssistant | 
+============================================================
+2026-10-05 18:21:39 | INFO     | UniversityAssistant | ✅ SERVER READY
+2026-10-05 18:21:39 | INFO     | UniversityAssistant | 🌐 URL: http://0.0.0.0:5000
+2026-10-05 18:21:39 | INFO     | UniversityAssistant | ============================================================
+
+2026-10-05 18:28:48 | DEBUG    | UniversityAssistant | Attempting Redis connection to localhost:6379
+2026-10-05 18:28:48 | INFO     | UniversityAssistant | ✓ Redis connection established
+2026-10-05 18:28:48 | INFO     | UniversityAssistant | Redis connected successfully to localhost:6379
+2026-10-05 18:28:48 | WARNING  | UniversityAssistant | OpenAI API key not configured - web search disabled
+2026-10-05 18:28:48 | INFO     | UniversityAssistant | Loaded 72 valid resources
+2026-10-05 18:28:48 | INFO     | UniversityAssistant | ExtractorService initialized | pdfplumber: True | PyPDF2: True | HTTP: True
+2026-10-05 18:28:48 | WARNING  | UniversityAssistant | Embeddings API key not configured — set OPENAI_API_KEY in .env
+2026-10-05 18:28:48 | INFO     | UniversityAssistant | 
+============================================================
+2026-10-05 18:28:48 | INFO     | UniversityAssistant | 🚀 UNIVERSITY ASSISTANT SYSTEM STARTING
+2026-10-05 18:28:48 | INFO     | UniversityAssistant | 📅 2026-10-05 18:28:48
+2026-10-05 18:28:48 | INFO     | UniversityAssistant | ============================================================
+2026-10-05 18:28:48 | INFO     | UniversityAssistant | ⚙️ System Configuration:
+2026-10-05 18:28:48 | INFO     | UniversityAssistant |   → Redis: ✓ Connected
+2026-10-05 18:28:48 | INFO     | UniversityAssistant |   → OpenAI: ✗ Not Configured
+2026-10-05 18:28:48 | INFO     | UniversityAssistant | ============================================================
+
+2026-10-05 18:28:48 | INFO     | UniversityAssistant | 📊 Similarity Threshold: 0.7
+2026-10-05 18:28:48 | INFO     | UniversityAssistant | 🔄 WORKFLOW: Query → Embeddings → Redis Cache → PDF/Web Extract → Answer
+2026-10-05 18:28:48 | INFO     | UniversityAssistant | 
+============================================================
+2026-10-05 18:28:48 | INFO     | UniversityAssistant | ✅ SERVER READY
+2026-10-05 18:28:48 | INFO     | UniversityAssistant | 🌐 URL: http://0.0.0.0:8000
+2026-10-05 18:28:48 | INFO     | UniversityAssistant | ============================================================
+
+2026-10-05 18:28:54 | DEBUG    | UniversityAssistant | Attempting Redis connection to localhost:6379
+2026-10-05 18:28:54 | INFO     | UniversityAssistant | ✓ Redis connection established
+2026-10-05 18:28:54 | INFO     | UniversityAssistant | Redis connected successfully to localhost:6379
+2026-10-05 18:28:54 | WARNING  | UniversityAssistant | OpenAI API key not configured - web search disabled
+2026-10-05 18:28:54 | INFO     | UniversityAssistant | Loaded 72 valid resources
+2026-10-05 18:28:54 | INFO     | UniversityAssistant | ExtractorService initialized | pdfplumber: True | PyPDF2: True | HTTP: True
+2026-10-05 18:28:54 | WARNING  | UniversityAssistant | Embeddings API key not configured — set OPENAI_API_KEY in .env
+2026-10-05 18:28:54 | INFO     | UniversityAssistant | 
+============================================================
+2026-10-05 18:28:54 | INFO     | UniversityAssistant | 🚀 UNIVERSITY ASSISTANT SYSTEM STARTING
+2026-10-05 18:28:54 | INFO     | UniversityAssistant | 📅 2026-10-05 18:28:54
+2026-10-05 18:28:54 | INFO     | UniversityAssistant | ============================================================
+2026-10-05 18:28:54 | INFO     | UniversityAssistant | ⚙️ System Configuration:
+2026-10-05 18:28:54 | INFO     | UniversityAssistant |   → Redis: ✓ Connected
+2026-10-05 18:28:54 | INFO     | UniversityAssistant |   → OpenAI: ✗ Not Configured
+2026-10-05 18:28:54 | INFO     | UniversityAssistant | ============================================================
+
+2026-10-05 18:28:54 | INFO     | UniversityAssistant | 📊 Similarity Threshold: 0.7
+2026-10-05 18:28:54 | INFO     | UniversityAssistant | 🔄 WORKFLOW: Query → Embeddings → Redis Cache → PDF/Web Extract → Answer
+2026-10-05 18:28:54 | INFO     | UniversityAssistant | 
+============================================================
+2026-10-05 18:28:54 | INFO     | UniversityAssistant | ✅ SERVER READY
+2026-10-05 18:28:54 | INFO     | UniversityAssistant | 🌐 URL: http://0.0.0.0:8000
+2026-10-05 18:28:54 | INFO     | UniversityAssistant | ============================================================
+
+2026-10-05 18:28:59 | INFO     | UniversityAssistant | 🌐 API GET /health → ✓ 200
+2026-10-05 18:29:09 | INFO     | UniversityAssistant | 🌐 API GET /health → ✓ 200
+2026-10-05 18:30:27 | INFO     | UniversityAssistant | 🌐 API GET /health → ✓ 200
+2026-10-05 18:30:47 | INFO     | UniversityAssistant | [calendar] API GET /api/calendar/events refresh=False remote=127.0.0.1
+2026-10-05 18:30:47 | INFO     | UniversityAssistant | [calendar] get_events start force_refresh=False redis_ok=True
+2026-10-05 18:30:47 | INFO     | UniversityAssistant | [calendar] cache key empty — will fetch fresh
+2026-10-05 18:30:47 | INFO     | UniversityAssistant | [calendar] fetching HTML (cache miss or force_refresh)
+2026-10-05 18:30:47 | INFO     | UniversityAssistant | [calendar] fetch start url=https://www.just.edu.jo/calendar/Pages/default.aspx CALENDAR_HTML_FILE=(none) cookie_set=False referer=(default just.edu.jo)
+2026-10-05 18:30:47 | INFO     | UniversityAssistant | 🌐 API GET /health → ✓ 200
+2026-10-05 18:30:48 | INFO     | UniversityAssistant | [calendar] HTTP response status=200 final_url=https://www.just.edu.jo/calendar/Pages/default.aspx html_chars=104003 encoding=utf-8
+2026-10-05 18:30:48 | INFO     | UniversityAssistant | [calendar] plain_text chars=9267 bot_wall=False preview='Academic Calendar × Sign In × JUST A-Z Sign In Academic Calendar University Home Welcome Vision, Mission & Values Strategic Plan, Pillars, and Objectives Qualit…'
+2026-10-05 18:30:48 | INFO     | UniversityAssistant | [calendar] semester grid HTML parse ok events=53 gv_rows=53 — skip LLM
+2026-10-05 18:30:48 | INFO     | UniversityAssistant | [calendar] parsed events=53 academic_year_hint='University Calendar of the Year 2026-2027'
+2026-10-05 18:30:48 | INFO     | UniversityAssistant | [calendar] redis SETEX ok key=calendar:academic_events_v1 ttl_s=604800 events=53
+2026-10-05 18:30:48 | INFO     | UniversityAssistant | [calendar] get_events done returning payload keys=['source_url', 'fetched_at', 'academic_year_hint', 'events', 'cached', 'cache_ttl_seconds_remaining']
+2026-10-05 18:30:48 | INFO     | UniversityAssistant | [calendar] API OK events=53 cached=False
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant | 🌐 API POST /query/stream
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | 
+============================================================
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | 📥 NEW QUERY RECEIVED
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | ============================================================
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | 📝 Query: help me
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | 📦 Redis JSON Provided: No
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | ------------------------------------------------------------
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | ▶ STEP 1: EMBEDDINGS + COSINE SIMILARITY | Searching for matching aliases
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | 🔍 STEP 1: Embeddings + Cosine Similarity Search
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant |   → Query: help me...
+2026-10-05 18:30:53 | WARNING  | UniversityAssistant | Embeddings service not configured - using fallback
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant | Generated key 'help' for 'help me'
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant | Cache MISS for key: help
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | ✗ No matching alias found
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | ✗ Redis cache MISS - Proceeding to next step
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | No embedding match - trying quick Redis lookup
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant | Generated key 'help' for 'help me'
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant | Cache MISS for key: help
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | ▶ STEP 2: GENERATE CANONICAL KEY | Creating topic identifier
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | 🔑 Generated canonical key: general
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant |   → From query: help me...
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | ▶ STEP 3: RESOURCE SELECTION | Finding best resource URL
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | 📚 STEP 2: Resource Selection
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | ✗ No matching resource - Will use web search
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | ▶ STEP 4: DATA EXTRACTION | Extracting from Web
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | 🔄 Extracting data...
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant |   → Source: Web Search...
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | 🔍 Extracting data for: help me... (key: general)
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant | No resource match for: general
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | Strategy 3: Web search fallback
+2026-10-05 18:30:53 | WARNING  | UniversityAssistant | OpenAI client not configured
+2026-10-05 18:30:53 | WARNING  | UniversityAssistant | OpenAI client not configured
+2026-10-05 18:30:53 | WARNING  | UniversityAssistant | All strategies failed: ['Web search failed']
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | ✓ Data extracted: 546 bytes
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | ✓ JSON dataset built with 9 keys
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant |   → Keys: topic, query, title, summary, suggestion...
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant | 🔄 Background: Starting Caching & Alias Generation...
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant | Background: Starting cache task for general
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | Background caching task started for 'general' (non-blocking)
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant | 🏷️ Background: Generating aliases...
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant | ✓ Background: Generated 1 aliases for: general
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | 🌐 STEP 4: Generating Answer (source: live_web)
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | 📡 Streaming answer to client...
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | ✓ Answer streamed: 473 characters
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | 
+------------------------------------------------------------
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | ✅ RESPONSE READY
+2026-10-05 18:30:53 | INFO     | UniversityAssistant |   → Source: live_web
+2026-10-05 18:30:53 | INFO     | UniversityAssistant |   → Answer: 473 chars
+2026-10-05 18:30:53 | INFO     | UniversityAssistant |   → Aliases: 1
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | ============================================================
+
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant | Stored 1 alias mappings for general (TTL: 86400s)
+2026-10-05 18:30:53 | INFO     | UniversityAssistant | Cached data for key: general (TTL: 86400s, Aliases: 1)
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant | ✓ Background: Cached in Redis - general
+2026-10-05 18:30:53 | DEBUG    | UniversityAssistant | ✓ Background: Caching & Alias Generation completed

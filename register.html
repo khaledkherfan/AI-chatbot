@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Create account | Student assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        font-family: Inter, system-ui, sans-serif;
+        background:
+          radial-gradient(800px 400px at 10% 0%, rgba(15, 118, 110, 0.09), transparent),
+          radial-gradient(600px 320px at 100% 100%, rgba(14, 165, 233, 0.07), transparent),
+          #f1f5f9;
+        color: #0f172a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.25rem;
+      }
+      .card {
+        width: 100%;
+        max-width: 420px;
+        background: #fff;
+        border-radius: 20px;
+        padding: 2rem 1.75rem;
+        box-shadow:
+          0 4px 6px rgba(15, 23, 42, 0.04),
+          0 24px 48px rgba(15, 23, 42, 0.08);
+        border: 1px solid rgba(226, 232, 240, 0.95);
+      }
+      .card-head {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+      }
+      .card-head svg {
+        flex-shrink: 0;
+        color: #0f766e;
+      }
+      h1 {
+        margin: 0 0 0.25rem;
+        font-size: 1.4rem;
+        letter-spacing: -0.02em;
+      }
+      .sub {
+        margin: 0 0 1.25rem;
+        font-size: 0.9rem;
+        color: #64748b;
+      }
+      label {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 600;
+        margin-bottom: 0.35rem;
+        color: #334155;
+      }
+      input {
+        width: 100%;
+        padding: 0.72rem 0.85rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        font: inherit;
+        margin-bottom: 1rem;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      }
+      input:focus {
+        outline: none;
+        border-color: #0f766e;
+        box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+      }
+      .err {
+        color: #dc2626;
+        font-size: 0.88rem;
+        margin-bottom: 1rem;
+        display: none;
+      }
+      .err.show {
+        display: block;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.25rem;
+      }
+      button[type="submit"] {
+        flex: 1;
+        min-width: 120px;
+        padding: 0.78rem 1rem;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(145deg, #0f766e, #0d9488);
+        color: #fff;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 6px 20px rgba(15, 118, 110, 0.28);
+      }
+      button[type="submit"]:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+      }
+      a {
+        color: #0f766e;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .foot {
+        margin-top: 1.25rem;
+        padding-top: 1rem;
+        border-top: 1px solid #e5e5e5;
+        font-size: 0.88rem;
+        color: #64748b;
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: max(0.75rem, env(safe-area-inset-top))
+            max(0.75rem, env(safe-area-inset-right))
+            max(0.75rem, env(safe-area-inset-bottom))
+            max(0.75rem, env(safe-area-inset-left));
+          align-items: stretch;
+        }
+        .card {
+          padding: 1.35rem 1.05rem;
+          border-radius: 16px;
+        }
+        h1 {
+          font-size: 1.2rem;
+        }
+        .actions {
+          flex-direction: column;
+        }
+        button[type="submit"] {
+          width: 100%;
+          min-height: 48px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="card-head">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M22 11v6M19 14h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <h1>Create account</h1>
+          <p class="sub" style="margin: 0">Use an email and password to save chat history and reminders.</p>
+        </div>
+      </div>
+      <form id="form">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email" required dir="ltr" />
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" autocomplete="new-password" required />
+        <label for="password2">Confirm password</label>
+        <input type="password" id="password2" name="password2" autocomplete="new-password" required />
+        <p class="err" id="err"></p>
+        <div class="actions">
+          <button type="submit" id="submit">Register</button>
+        </div>
+      </form>
+      <div class="foot">
+        Already have an account?
+        <a id="linkLogin" href="/login.html">Log in</a>
+        ·
+        <a id="linkBack" href="/assistant.html">Back to assistant</a>
+      </div>
+    </div>
+    <script src="/static/auth.js"></script>
+    <script>
+      (function () {
+        var API_BASE = window.location.origin;
+
+        function safeNext() {
+          var raw = new URLSearchParams(location.search).get("next");
+          if (!raw || typeof raw !== "string") return "/assistant.html";
+          if (!raw.startsWith("/") || raw.startsWith("//")) return "/assistant.html";
+          return raw;
+        }
+
+        var next = safeNext();
+        var enc = encodeURIComponent(next);
+        document.getElementById("linkLogin").href = "/login.html?next=" + enc;
+        document.getElementById("linkBack").href =
+          next.split("?")[0] === "/calendar-reminders.html"
+            ? "/calendar-reminders.html"
+            : "/assistant.html";
+
+        var form = document.getElementById("form");
+        var err = document.getElementById("err");
+        var submit = document.getElementById("submit");
+
+        form.addEventListener("submit", async function (ev) {
+          ev.preventDefault();
+          err.classList.remove("show");
+          err.textContent = "";
+          var email = document.getElementById("email").value.trim();
+          var password = document.getElementById("password").value;
+          var password2 = document.getElementById("password2").value;
+          if (password !== password2) {
+            err.textContent = "Passwords do not match";
+            err.classList.add("show");
+            return;
+          }
+          submit.disabled = true;
+          try {
+            await JUSTAuth.register(API_BASE, email, password);
+            window.location.assign(next);
+          } catch (e) {
+            err.textContent = e.message || String(e);
+            err.classList.add("show");
+          } finally {
+            submit.disabled = false;
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

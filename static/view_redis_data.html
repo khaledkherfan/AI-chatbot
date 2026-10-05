@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Detailed data view — JUST</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #0d4f8b;
+        --primary-dark: #083a66;
+        --secondary: #1a7f64;
+        --accent: #f4a523;
+        --bg-main: #f0f4f8;
+        --bg-card: #ffffff;
+        --text-primary: #1a1a2e;
+        --text-secondary: #4a5568;
+        --border: #e2e8f0;
+        --success: #22c55e;
+        --error: #ef4444;
+        --gradient-primary: linear-gradient(135deg, #0d4f8b 0%, #1a7f64 100%);
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+        --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-primary);
+        min-height: 100vh;
+        line-height: 1.7;
+      }
+
+      /* Header */
+      .header {
+        background: var(--gradient-primary);
+        color: white;
+        padding: 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2.5l5 3.5-5 3.5z'/%3E%3C/g%3E%3C/svg%3E");
+      }
+
+      .header-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .header h1 {
+        font-family: system-ui, sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+      }
+
+      .header p {
+        opacity: 0.9;
+      }
+
+      /* Main Container */
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      /* Tabs */
+      .tabs {
+        display: flex;
+        gap: 4px;
+        background: var(--bg-card);
+        padding: 6px;
+        border-radius: 12px;
+        box-shadow: var(--shadow-sm);
+        margin-bottom: 2rem;
+        overflow-x: auto;
+      }
+
+      .tab {
+        flex: 1;
+        min-width: 150px;
+        padding: 14px 20px;
+        border: none;
+        background: transparent;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .tab:hover {
+        background: var(--bg-main);
+      }
+
+      .tab.active {
+        background: var(--gradient-primary);
+        color: white;
+      }
+
+      .tab-count {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+      }
+
+      .tab.active .tab-count {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      /* Tab Content */
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Section */
+      .section {
+        background: var(--bg-card);
+        border-radius: 16px;
+        box-shadow: var(--shadow-md);
+        margin-bottom: 2rem;
+        overflow: hidden;
+      }
+
+      .section-header {
+        background: linear-gradient(to left, #f8fafc, #ffffff);
+        padding: 1.25rem 1.5rem;
+        border-bottom: 2px solid var(--border);
+      }
+
+      .section-title {
+        font-family: system-ui, sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .section-body {
+        padding: 1.5rem;
+      }
+
+      /* Data Table */
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .data-table th,
+      .data-table td {
+        padding: 14px 16px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .data-table th {
+        background: var(--bg-main);
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 0.9rem;
+      }
+
+      .data-table tr:hover {
+        background: #f8fafc;
+      }
+
+      .data-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      /* Data Card Grid */
+      .data-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .data-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .data-card:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-3px);
+      }
+
+      .data-card-header {
+        background: var(--gradient-primary);
+        color: white;
+        padding: 1rem 1.25rem;
+      }
+
+      .data-card-title {
+        font-weight: 700;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .data-card-body {
+        padding: 1.25rem;
+      }
+
+      .data-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px dashed var(--border);
+      }
+
+      .data-row:last-child {
+        border-bottom: none;
+      }
+
+      .data-label {
+        font-weight: 600;
+        color: var(--text-secondary);
+      }
+
+      .data-value {
+        color: var(--text-primary);
+        text-align: left;
+        direction: ltr;
+      }
+
+      /* Alias Tags */
+      .alias-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 1rem;
+      }
+
+      .alias-tag {
+        background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+        color: var(--primary);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        border: 1px solid #7dd3fc;
+      }
+
+      .alias-tag.arabic {
+        background: linear-gradient(135deg, #e8f5f1, #d1fae5);
+        color: var(--secondary);
+        border-color: #a7f3d0;
+      }
+
+      /* Key Stats */
+      .key-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .key-stat {
+        background: var(--bg-card);
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border);
+      }
+
+      .key-stat-value {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .key-stat-label {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      /* JSON Viewer */
+      .json-viewer {
+        background: #1e293b;
+        color: #e2e8f0;
+        padding: 1.25rem;
+        border-radius: 10px;
+        font-family: "Courier New", monospace;
+        font-size: 0.85rem;
+        overflow-x: auto;
+        direction: ltr;
+        text-align: left;
+        white-space: pre-wrap;
+        max-height: 500px;
+        overflow-y: auto;
+      }
+
+      /* Empty State */
+      .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: var(--text-secondary);
+      }
+
+      .empty-state-icon {
+        font-size: 5rem;
+        margin-bottom: 1.5rem;
+        opacity: 0.4;
+      }
+
+      .empty-state h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+      }
+
+      /* Navigation */
+      .nav-links {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .nav-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link.primary {
+        background: var(--gradient-primary);
+        color: white;
+        box-shadow: 0 4px 15px rgba(13, 79, 139, 0.3);
+      }
+
+      .nav-link.primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(13, 79, 139, 0.4);
+      }
+
+      .nav-link.secondary {
+        background: var(--bg-card);
+        color: var(--primary);
+        border: 2px solid var(--primary);
+      }
+
+      .nav-link.secondary:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      /* Loading */
+      .loading {
+        text-align: center;
+        padding: 4rem;
+      }
+
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid var(--border);
+        border-top-color: var(--primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 1rem;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 1.5rem;
+        }
+        .container {
+          padding: 1rem;
+        }
+        .tabs {
+          flex-direction: column;
+        }
+        .tab {
+          min-width: auto;
+        }
+        .data-grid {
+          grid-template-columns: 1fr;
+        }
+        .key-stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .key-stats {
+          grid-template-columns: 1fr;
+        }
+        .header h1 {
+          font-size: 1.25rem;
+        }
+        .header-content {
+          padding-inline: 0.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-content">
+        <h1>📋 Detailed data view</h1>
+        <p>Full view of cached records, aliases, and embeddings</p>
+      </div>
+    </header>
+
+    <div class="container">
+      <!-- Stats -->
+      <div class="key-stats">
+        <div class="key-stat">
+          <div class="key-stat-value" id="totalData">-</div>
+          <div class="key-stat-label">📊 Total records</div>
+        </div>
+        <div class="key-stat">
+          <div class="key-stat-value" id="totalAliases">-</div>
+          <div class="key-stat-label">🏷️ Aliases</div>
+        </div>
+        <div class="key-stat">
+          <div class="key-stat-value" id="totalEmbeddings">-</div>
+          <div class="key-stat-label">🧮 Embeddings</div>
+        </div>
+        <div class="key-stat">
+          <div class="key-stat-value" id="totalCanonical">-</div>
+          <div class="key-stat-label">🔑 Primary keys</div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab active" data-tab="data" onclick="switchTab('data')">
+          <span>📦</span>
+          <span>Stored data</span>
+          <span class="tab-count" id="dataTabCount">0</span>
+        </button>
+        <button class="tab" data-tab="aliases" onclick="switchTab('aliases')">
+          <span>🏷️</span>
+          <span>Aliases</span>
+          <span class="tab-count" id="aliasTabCount">0</span>
+        </button>
+        <button class="tab" data-tab="raw" onclick="switchTab('raw')">
+          <span>📄</span>
+          <span>Raw JSON</span>
+        </button>
+      </div>
+
+      <!-- Data Tab -->
+      <div id="data-content" class="tab-content active">
+        <div id="dataContainer">
+          <div class="loading">
+            <div class="spinner"></div>
+            <p>Loading data…</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aliases Tab -->
+      <div id="aliases-content" class="tab-content">
+        <div id="aliasContainer">
+          <div class="loading">
+            <div class="spinner"></div>
+            <p>Loading aliases…</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Raw Tab -->
+      <div id="raw-content" class="tab-content">
+        <div class="section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span>📄</span>
+              Raw data (JSON)
+            </h2>
+          </div>
+          <div class="section-body">
+            <div class="json-viewer" id="rawJson">Loading…</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="nav-links">
+        <a href="/assistant.html" class="nav-link primary">
+          <span>💬</span>
+          <span>Chat assistant</span>
+        </a>
+        <a href="quick_view_redis.html" class="nav-link secondary">
+          <span>👁️</span>
+          <span>Quick view</span>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      const API_BASE = window.location.origin;
+      let allData = [];
+      let allAliases = {};
+
+      function switchTab(tabName) {
+        // Update tab buttons
+        document.querySelectorAll(".tab").forEach((tab) => {
+          tab.classList.remove("active");
+          if (tab.dataset.tab === tabName) {
+            tab.classList.add("active");
+          }
+        });
+
+        // Update tab content
+        document.querySelectorAll(".tab-content").forEach((content) => {
+          content.classList.remove("active");
+        });
+        document.getElementById(`${tabName}-content`).classList.add("active");
+      }
+
+      async function loadAllData() {
+        try {
+          // Load keys overview
+          const keysRes = await fetch(`${API_BASE}/api/redis/keys`);
+          const keys = await keysRes.json();
+
+          document.getElementById("totalData").textContent =
+            keys.data_keys?.length || 0;
+          document.getElementById("totalAliases").textContent =
+            keys.alias_keys?.length || 0;
+          document.getElementById("totalEmbeddings").textContent =
+            keys.embedding_keys?.length || 0;
+          document.getElementById("totalCanonical").textContent =
+            keys.canonical_keys?.length || 0;
+
+          document.getElementById("dataTabCount").textContent =
+            keys.data_keys?.length || 0;
+          document.getElementById("aliasTabCount").textContent =
+            keys.canonical_keys?.length || 0;
+
+          // Load all data
+          const dataRes = await fetch(`${API_BASE}/api/redis/all-data`);
+          if (dataRes.ok) {
+            allData = await dataRes.json();
+            renderDataGrid(allData);
+            document.getElementById("rawJson").textContent = JSON.stringify(
+              allData,
+              null,
+              2
+            );
+          } else {
+            throw new Error("Failed to load data");
+          }
+
+          // Load aliases
+          const aliasRes = await fetch(`${API_BASE}/api/redis/aliases`);
+          if (aliasRes.ok) {
+            allAliases = await aliasRes.json();
+            renderAliases(allAliases);
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          document.getElementById("dataContainer").innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">⚠️</div>
+                        <h3>Error loading data</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+        }
+      }
+
+      function renderDataGrid(dataList) {
+        const container = document.getElementById("dataContainer");
+
+        if (!dataList || dataList.length === 0) {
+          container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <h3>No cached data</h3>
+                        <p>Ask the assistant questions to populate the cache.</p>
+                    </div>
+                `;
+          return;
+        }
+
+        let html = '<div class="data-grid">';
+
+        dataList.forEach((item, index) => {
+          const key = item.canonical_key || item.topic || `record-${index}`;
+          const data = item.data || item;
+          const aliases = data.aliases || [];
+
+          html += `
+                    <div class="data-card">
+                        <div class="data-card-header">
+                            <span class="data-card-title">
+                                <span>📄</span>
+                                ${data.title || key}
+                            </span>
+                        </div>
+                        <div class="data-card-body">
+                            <div class="data-row">
+                                <span class="data-label">Key:</span>
+                                <span class="data-value">${key}</span>
+                            </div>
+                            ${
+                              data.summary
+                                ? `
+                                <div class="data-row">
+                                    <span class="data-label">Summary:</span>
+                                    <span class="data-value" style="direction:ltr;text-align:left;">${data.summary.substring(
+                                      0,
+                                      100
+                                    )}...</span>
+                                </div>
+                            `
+                                : ""
+                            }
+                            ${
+                              data.url
+                                ? `
+                                <div class="data-row">
+                                    <span class="data-label">URL:</span>
+                                    <span class="data-value"><a href="${data.url}" target="_blank" style="color:var(--secondary);">Open</a></span>
+                                </div>
+                            `
+                                : ""
+                            }
+                            ${
+                              aliases.length > 0
+                                ? `
+                                <div class="alias-list">
+                                    ${aliases
+                                      .slice(0, 6)
+                                      .map(
+                                        (a) =>
+                                          `<span class="alias-tag ${
+                                            /[\u0600-\u06FF]/.test(a)
+                                              ? "arabic"
+                                              : ""
+                                          }">${a}</span>`
+                                      )
+                                      .join("")}
+                                    ${
+                                      aliases.length > 6
+                                        ? `<span class="alias-tag">+${
+                                            aliases.length - 6
+                                          }</span>`
+                                        : ""
+                                    }
+                                </div>
+                            `
+                                : ""
+                            }
+                        </div>
+                    </div>
+                `;
+        });
+
+        html += "</div>";
+        container.innerHTML = html;
+      }
+
+      function renderAliases(aliasMap) {
+        const container = document.getElementById("aliasContainer");
+
+        if (!aliasMap || Object.keys(aliasMap).length === 0) {
+          container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🏷️</div>
+                        <h3>No aliases yet</h3>
+                        <p>Aliases are created automatically when users ask questions.</p>
+                    </div>
+                `;
+          return;
+        }
+
+        let html = "";
+
+        for (const [canonical, aliases] of Object.entries(aliasMap)) {
+          const arabicAliases = aliases.filter((a) =>
+            /[\u0600-\u06FF]/.test(a)
+          );
+          const englishAliases = aliases.filter(
+            (a) => !/[\u0600-\u06FF]/.test(a)
+          );
+
+          html += `
+                    <div class="section" style="margin-bottom:1.5rem;">
+                        <div class="section-header">
+                            <h2 class="section-title">
+                                <span>🔑</span>
+                                ${canonical}
+                                <span style="font-weight:400;font-size:0.9rem;color:var(--text-secondary);">(${
+                                  aliases.length
+                                } aliases)</span>
+                            </h2>
+                        </div>
+                        <div class="section-body">
+                            ${
+                              arabicAliases.length > 0
+                                ? `
+                                <p style="font-weight:600;color:var(--secondary);margin-bottom:0.5rem;">🌍 Arabic script (${
+                                  arabicAliases.length
+                                })</p>
+                                <div class="alias-list" style="margin-bottom:1rem;">
+                                    ${arabicAliases
+                                      .map(
+                                        (a) =>
+                                          `<span class="alias-tag arabic">${a}</span>`
+                                      )
+                                      .join("")}
+                                </div>
+                            `
+                                : ""
+                            }
+                            ${
+                              englishAliases.length > 0
+                                ? `
+                                <p style="font-weight:600;color:var(--primary);margin-bottom:0.5rem;">🔤 English (${
+                                  englishAliases.length
+                                })</p>
+                                <div class="alias-list">
+                                    ${englishAliases
+                                      .map(
+                                        (a) =>
+                                          `<span class="alias-tag">${a}</span>`
+                                      )
+                                      .join("")}
+                                </div>
+                            `
+                                : ""
+                            }
+                        </div>
+                    </div>
+                `;
+        }
+
+        container.innerHTML = html;
+      }
+
+      // Load on page ready
+      document.addEventListener("DOMContentLoaded", loadAllData);
+    </script>
+  </body>
+</html>

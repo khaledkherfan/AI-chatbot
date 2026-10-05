@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Admin — JUST Assistant</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">
+          <span class="brand-mark">J</span>
+          <div>
+            <div class="brand-title">JUST Assistant</div>
+            <div class="brand-sub">Control panel</div>
+          </div>
+        </div>
+        <nav class="nav" id="main-nav">
+          <button type="button" class="nav-item active" data-view="overview">Overview</button>
+          <button type="button" class="nav-item" data-view="analytics">Question analytics</button>
+          <button type="button" class="nav-item" data-view="redis-quick">Redis (quick)</button>
+          <button type="button" class="nav-item" data-view="redis-detail">Redis (detail)</button>
+          <button type="button" class="nav-item" data-view="activity">Activity &amp; logs</button>
+          <button type="button" class="nav-item" data-view="settings">Settings</button>
+        </nav>
+        <a class="nav-external" href="/assistant.html" target="_blank" rel="noopener">User app →</a>
+      </aside>
+      <button
+        type="button"
+        class="sidebar-backdrop"
+        id="sidebarBackdrop"
+        aria-label="Close menu"
+        tabindex="-1"
+      ></button>
+
+      <div class="main">
+        <header class="topbar">
+          <button type="button" class="icon-btn mobile-only" id="btn-menu" aria-label="Menu">☰</button>
+          <h1 class="topbar-title" id="page-title">Overview</h1>
+          <div class="topbar-actions">
+            <button type="button" class="icon-btn" id="btn-theme" title="Toggle dark / light">◐</button>
+          </div>
+        </header>
+
+        <main class="content">
+          <!-- Overview -->
+          <section class="view view--active" id="view-overview" data-view="overview">
+            <p class="lead">
+              Live stats from the assistant path: semantic matching, Redis, and
+              <code>/query</code> and <code>/query/stream</code> requests.
+            </p>
+            <div class="metrics" id="metric-cards"></div>
+            <div class="grid-2">
+              <div class="card">
+                <h3>Insights</h3>
+                <p id="insight-summary" class="muted">—</p>
+                <ul class="list-compact" id="insight-list"></ul>
+              </div>
+              <div class="card">
+                <h3>Integration status</h3>
+                <ul class="check-list" id="integration-status"></ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Analytics -->
+          <section class="view" id="view-analytics" data-view="analytics">
+            <p class="lead">
+              Top questions, top topics, and daily request volume — from
+              <code>logs/query_events.jsonl</code>.
+            </p>
+            <div class="toolbar page-toolbar">
+              <label>Range <select id="analytics-range">
+                  <option value="7d">7 days</option>
+                  <option value="14d">14 days</option>
+                  <option value="30d" selected>30 days</option>
+                  <option value="90d">90 days</option>
+                </select></label>
+              <button type="button" class="btn btn-secondary" id="btn-export-csv">Export CSV</button>
+            </div>
+            <div class="charts-row">
+              <div class="card chart-card"><canvas id="chart-daily"></canvas></div>
+              <div class="card chart-card"><canvas id="chart-source"></canvas></div>
+            </div>
+            <div class="card chart-card wide"><canvas id="chart-topics"></canvas></div>
+            <div class="grid-2">
+              <div class="card">
+                <h3>Top questions</h3>
+                <div class="table-wrap">
+                  <table class="table" id="table-top-q">
+                    <thead><tr><th>Question</th><th>Count</th></tr></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="card">
+                <h3>Top topics</h3>
+                <div class="table-wrap">
+                  <table class="table" id="table-top-t">
+                    <thead><tr><th>Topic</th><th>Count</th></tr></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Redis quick -->
+          <section class="view" id="view-redis-quick" data-view="redis-quick">
+            <p class="lead">Cards for <code>data:*</code> keys (legacy quick view).</p>
+            <div class="stats-inline" id="redis-quick-stats"></div>
+            <div id="redis-quick-cards" class="redis-cards"></div>
+          </section>
+
+          <!-- Redis detailed -->
+          <section class="view" id="view-redis-detail" data-view="redis-detail">
+            <p class="lead">Redis keys, tables, and aliases — legacy detailed view.</p>
+            <div class="tabs" id="redis-tabs">
+              <button type="button" class="tab active" data-tab="keys">Keys</button>
+              <button type="button" class="tab" data-tab="data">Data</button>
+              <button type="button" class="tab" data-tab="aliases">Aliases</button>
+            </div>
+            <div class="tab-panel active" id="panel-keys">
+              <div class="card"><pre class="json-pre" id="redis-keys-dump"></pre></div>
+            </div>
+            <div class="tab-panel" id="panel-data">
+              <div class="card table-wrap">
+                <table class="table" id="redis-data-table">
+                  <thead><tr><th>Key</th><th>JSON preview</th></tr></thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="tab-panel" id="panel-aliases">
+              <div class="card table-wrap">
+                <table class="table" id="redis-alias-table">
+                  <thead><tr><th>Canonical</th><th>Alias count</th></tr></thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- Activity -->
+          <section class="view" id="view-activity" data-view="activity">
+            <div class="grid-2">
+              <div class="card">
+                <h3>Recent logged queries</h3>
+                <div class="feed" id="activity-feed"></div>
+              </div>
+              <div class="card">
+                <div class="row-between">
+                  <h3>assistant.log</h3>
+                  <div class="toolbar compact">
+                    <input type="search" id="log-search" placeholder="Search" />
+                    <select id="log-level">
+                      <option value="all">All</option>
+                      <option value="error">Error</option>
+                      <option value="warning">Warning</option>
+                      <option value="info">Info</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="log-table-wrap">
+                  <table class="table" id="log-table">
+                    <thead><tr><th>Time</th><th>Level</th><th>Message</th></tr></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Settings -->
+          <section class="view" id="view-settings" data-view="settings">
+            <div class="card stack" id="settings-panel"></div>
+            <div class="card danger-zone">
+              <h3>Redis maintenance</h3>
+              <p class="muted">Clear all cache data (data / aliases / embeddings). This cannot be undone.</p>
+              <button type="button" class="btn btn-danger" id="btn-clear-redis">Clear cache</button>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+    <script src="js/app.js" defer></script>
+  </body>
+</html>

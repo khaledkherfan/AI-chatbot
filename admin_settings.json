@@ -1,0 +1,16 @@
+{
+  "siteName": "JUST University Assistant",
+  "maintenanceMode": false,
+  "integrations": [
+    {
+      "id": "i1",
+      "name": "OpenAI",
+      "connected": true
+    },
+    {
+      "id": "i2",
+      "name": "Redis",
+      "connected": true
+    }
+  ]
+}

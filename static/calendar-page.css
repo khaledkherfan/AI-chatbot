@@ -1,0 +1,554 @@
+/* Academic calendar — extends assistant.css */
+
+.main-col {
+  background: var(--surface-raised);
+}
+
+.cal-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1rem 1.15rem 2rem;
+}
+
+.page-hero,
+.hero {
+  max-width: 1180px;
+  margin: 0 auto 1.15rem;
+  padding: 1.15rem 1.25rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 28px rgba(12, 18, 34, 0.05);
+}
+
+.page-hero h1 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.25rem, 3vw, 1.55rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.page-hero p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  line-height: 1.65;
+  max-width: 52ch;
+}
+
+.login-banner {
+  display: none;
+  max-width: 1180px;
+  margin: 0 auto 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-sm);
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  font-size: 0.88rem;
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+.login-banner a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.cal-layout {
+  display: grid;
+  grid-template-columns: 1fr min(340px, 36vw);
+  gap: 1rem;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+@media (max-width: 960px) {
+  .cal-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cal-panel,
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.15rem;
+  box-shadow: 0 2px 12px rgba(12, 18, 34, 0.04);
+}
+
+.cal-panel h2,
+.panel h2 {
+  margin: 0 0 0.85rem;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  color: var(--ink);
+}
+
+.cal-panel-note,
+.panel > p.cal-panel-note {
+  margin: 0 0 0.85rem;
+  font-size: 0.84rem;
+  color: var(--ink-muted);
+  line-height: 1.55;
+}
+
+.hero-top {
+  display: block;
+}
+
+.pill {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.28rem 0.65rem;
+  border-radius: var(--radius-pill);
+  background: var(--surface-raised);
+  color: var(--ink-muted);
+  border: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.pill.ok {
+  color: #059669;
+  border-color: rgba(5, 150, 105, 0.35);
+  background: rgba(5, 150, 105, 0.08);
+}
+
+.sidebar-status .pill {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: var(--radius-sm);
+  line-height: 1.35;
+  text-align: left;
+  font-size: 0.72rem;
+}
+
+.cal-toolbar,
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.cal-search,
+.search {
+  flex: 1;
+  min-width: 180px;
+  position: relative;
+}
+
+.cal-search input,
+.search input {
+  width: 100%;
+  padding: 0.6rem 0.85rem 0.6rem 2.35rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--ink);
+  transition: border-color 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
+}
+
+.cal-search input:focus,
+.search input:focus {
+  outline: none;
+  border-color: rgba(13, 110, 99, 0.45);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.cal-search input::placeholder,
+.search input::placeholder {
+  color: var(--ink-faint);
+}
+
+.cal-search::before,
+.search::before {
+  content: "";
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  transform: translateY(-50%);
+  border: 2px solid var(--ink-faint);
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+.btn {
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.86rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 0.95rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  transition: transform 160ms var(--ease-out), background 160ms var(--ease-out);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-ghost {
+  background: var(--surface-raised);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-ghost:hover {
+    background: var(--surface);
+    border-color: var(--line-strong);
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(145deg, var(--accent) 0%, #128a7d 100%);
+  color: #fff;
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-sm {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  border-radius: 9px;
+  border: 1px solid rgba(13, 110, 99, 0.35);
+  background: transparent;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-sm:hover {
+    background: var(--accent-soft);
+  }
+}
+
+.btn-sm:active {
+  transform: scale(0.97);
+}
+
+.events-grid {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.event-card {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  padding: 0.9rem 1rem;
+  display: grid;
+  gap: 0.4rem;
+  transition: border-color 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
+
+  @starting-style {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  animation: eventIn 220ms var(--ease-out) backwards;
+}
+
+@keyframes eventIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.event-card h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.meta {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.12rem 0.45rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.event-actions {
+  margin-top: 0.25rem;
+}
+
+.rem-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  max-height: 420px;
+  overflow: auto;
+}
+
+.rem-item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.8rem;
+  background: var(--surface-raised);
+}
+
+.rem-item strong {
+  display: block;
+  font-size: 0.88rem;
+  margin-bottom: 0.2rem;
+}
+
+.rem-item small {
+  color: var(--ink-muted);
+  font-size: 0.76rem;
+}
+
+.rem-item button {
+  margin-top: 0.4rem;
+  font-size: 0.74rem;
+  padding: 0.22rem 0.45rem;
+  border-radius: 8px;
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  background: transparent;
+  color: var(--danger);
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 160ms var(--ease-out);
+}
+
+.rem-item button:active {
+  transform: scale(0.97);
+}
+
+.cal-empty,
+.cal-load-row,
+.empty {
+  text-align: center;
+  color: var(--ink-muted);
+  padding: 1.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.cal-err,
+.err {
+  color: var(--danger);
+  font-size: 0.86rem;
+  margin-bottom: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  background: var(--danger-soft);
+  border-radius: var(--radius-sm);
+  border: 1px solid #fecaca;
+}
+
+.cal-spinner,
+.loading {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(100, 116, 139, 0.3);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: calSpin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-inline-end: 0.35rem;
+}
+
+@keyframes calSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Auth aliases (calendar HTML ids) */
+.cal-header-user {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cal-header-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--ink);
+  transition: transform 160ms var(--ease-out), background 160ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cal-header-logout:hover {
+    background: var(--surface-raised);
+  }
+}
+
+.cal-header-logout:active {
+  transform: scale(0.97);
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  background: var(--ink);
+  color: #f8f9fc;
+  padding: 0.7rem 1.15rem;
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+  font-weight: 500;
+  z-index: 50;
+  opacity: 0;
+  transition:
+    transform 220ms var(--ease-out),
+    opacity 220ms var(--ease-out);
+  max-width: min(92vw, 400px);
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(12, 18, 34, 0.2);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Modal */
+dialog.cal-modal,
+dialog.modal {
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 0;
+  max-width: min(96vw, 420px);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 24px 64px rgba(12, 18, 34, 0.18);
+}
+
+dialog.cal-modal::backdrop,
+dialog.modal::backdrop {
+  background: rgba(12, 18, 34, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.modal-body {
+  padding: 1.2rem 1.25rem 0.85rem;
+}
+
+.modal-body h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.modal-body label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  margin-bottom: 0.3rem;
+}
+
+.modal-body input[type="datetime-local"] {
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  font: inherit;
+  margin-bottom: 0.65rem;
+}
+
+.modal-body input:focus {
+  outline: none;
+  border-color: rgba(13, 110, 99, 0.45);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.modal-hint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  padding: 0 1.25rem 1.15rem;
+}
+
+@media (max-width: 640px) {
+  .cal-scroll {
+    padding: 0.65rem 0.75rem 1.25rem;
+  }
+
+  .cal-panel h2 {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cal-toolbar {
+    flex-direction: column;
+  }
+
+  .cal-search {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .event-card {
+    animation: none;
+  }
+
+  .toast {
+    transition: opacity 150ms ease;
+  }
+}

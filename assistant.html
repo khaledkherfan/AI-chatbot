@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Ask about Jordan University of Science and Technology — registration, fees, calendar, and more."
+    />
+    <title>Student assistant · JUST</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/assistant.css" />
+    <link rel="stylesheet" href="/static/mobile-app-shell.css" />
+  </head>
+  <body>
+    <div class="app-root" id="appRoot">
+      <aside class="sidebar" aria-label="Main navigation">
+        <div class="sidebar-brand">
+          <span class="brand-mark" aria-hidden="true">JUST</span>
+          <span>Student assistant</span>
+        </div>
+        <nav class="sidebar-nav">
+          <span class="nav-item active" id="nav-chat" aria-current="page">
+            <svg
+              class="nav-ico"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Chat
+          </span>
+          <a class="nav-link" href="/planner.html">
+            <svg
+              class="nav-ico"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+              />
+              <path
+                d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M8 7h8M8 11h8M8 15h5"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+              />
+            </svg>
+            Study plan
+          </a>
+          <a class="nav-link" href="/calendar-reminders.html">
+            <svg
+              class="nav-ico"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <rect
+                x="3"
+                y="4"
+                width="18"
+                height="18"
+                rx="2"
+                stroke="currentColor"
+                stroke-width="1.75"
+              />
+              <path
+                d="M16 2v4M8 2v4M3 10h18"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+              />
+            </svg>
+            Calendar
+          </a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="sidebar-status" id="sidebarStatus" title="Service status">
+            <span class="status-dot" id="dotHealth"></span>
+            <span id="statusLabel">Checking…</span>
+          </div>
+          <a class="nav-link-muted" href="/admin/">Admin</a>
+        </div>
+      </aside>
+
+      <div
+        class="sidebar-backdrop"
+        id="sidebarBackdrop"
+        aria-hidden="true"
+      ></div>
+
+      <div class="main-col">
+        <header class="main-topbar">
+          <button
+            type="button"
+            class="btn-sidebar-toggle"
+            id="btnSidebarToggle"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="appRoot"
+          >
+            ☰
+          </button>
+          <div class="main-topbar-auth" id="headerAuth">
+            <div id="headerGuestGroup" class="header-auth-group">
+              <a
+                class="main-topbar-link"
+                href="/login.html"
+                id="linkHeaderLogin"
+                >Log in</a
+              >
+              <span class="main-topbar-sep" aria-hidden="true">·</span>
+              <a
+                class="main-topbar-link"
+                href="/register.html"
+                id="linkHeaderRegister"
+                >Register</a
+              >
+            </div>
+            <div id="headerUserGroup" class="header-auth-group is-hidden">
+              <span class="header-user-email" id="headerAuthUser"></span>
+              <button
+                type="button"
+                class="header-logout-btn"
+                id="btnHeaderLogout"
+              >
+                Log out
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <div class="main-body-stack">
+          <section
+            id="panel-chat"
+            class="panel-chatgpt active"
+            role="main"
+            aria-labelledby="chatViewHeading"
+          >
+            <div class="chat-main-inner">
+              <header class="chat-view-head">
+                <div class="chat-view-head-inner">
+                  <p class="chat-view-kicker">
+                    Jordan University of Science &amp; Technology
+                  </p>
+                  <h1 class="chat-view-title" id="chatViewHeading">
+                    How can I help?
+                  </h1>
+                  <p class="chat-view-desc">
+                    Ask about registration, fees, deadlines, or programs.
+                    Answers are guidance only — confirm with official university
+                    sources.
+                  </p>
+                </div>
+              </header>
+
+              <div
+                class="faq-suggestions"
+                id="faqSuggestions"
+                aria-label="Suggested questions"
+              >
+                <p class="faq-suggestions-label">Try asking</p>
+                <div class="faq-chips" id="faqChips" role="list"></div>
+              </div>
+
+              <div
+                id="errorSection"
+                class="chat-error-zone"
+                aria-live="polite"
+              ></div>
+
+              <div class="chat-scroll" id="chatScrollArea">
+                <div class="empty-state" aria-hidden="true">
+                  <div class="empty-state-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M12 3L2 8l10 5 10-5-10-5z"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M2 13l10 5 10-5M6 11v6l6 3"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <p>
+                    Type a question below or pick a suggestion to get started.
+                  </p>
+                </div>
+                <div
+                  class="chat-thread"
+                  id="chatThread"
+                  aria-live="polite"
+                ></div>
+              </div>
+
+              <!-- Process steps panel — live pipeline progress -->
+              <div class="process-panel" id="processPanel" aria-live="polite" hidden>
+                <div class="process-steps">
+                  <header class="process-panel-head">
+                    <span class="process-panel-pulse" aria-hidden="true"></span>
+                    <span class="process-panel-title">Processing your question</span>
+                  </header>
+                  <div class="process-steps-list" id="processSteps"></div>
+                </div>
+              </div>
+
+              <footer class="composer">
+                <div class="composer-inner">
+                  <div class="image-preview-bar" id="imagePreviewBar">
+                    <img id="imagePreviewThumb" alt="" />
+                    <span class="image-preview-meta" id="imagePreviewMeta"
+                      >Image attached</span
+                    >
+                    <button
+                      type="button"
+                      class="btn-clear-image"
+                      id="btnClearImage"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                  <div class="composer-row">
+                    <input
+                      type="file"
+                      id="imageInput"
+                      accept="image/jpeg,image/png,image/webp,image/gif"
+                      hidden
+                    />
+                    <button
+                      type="button"
+                      class="btn-attach-image"
+                      id="btnAttachImage"
+                      title="Attach image"
+                      aria-label="Attach image"
+                    >
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M4 16l4.586-4.586a2 2 0 0 1 2.828 0L16 16m-2-2l1.586-1.586a2 2 0 0 1 2.828 0L20 14m-6-6h.01M6 20h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"
+                          stroke="currentColor"
+                          stroke-width="1.75"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </button>
+                    <textarea
+                      id="queryInput"
+                      class="composer-input"
+                      placeholder="Ask about registration, fees, deadlines…"
+                      rows="1"
+                      aria-label="Your question"
+                    ></textarea>
+                    <button
+                      type="button"
+                      class="btn-send-round"
+                      id="sendBtn"
+                      onclick="sendQuery()"
+                      title="Send (Enter)"
+                      aria-label="Send message"
+                    >
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                      </svg>
+                    </button>
+                  </div>
+                  <p class="composer-hint">
+                    <kbd>Enter</kbd> send · <kbd>Shift</kbd>+<kbd>Enter</kbd>
+                    new line
+                  </p>
+                </div>
+              </footer>
+            </div>
+          </section>
+
+          <p class="footer-note">
+            Not an official university decision — verify on just.edu.jo
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/static/auth.js"></script>
+    <script src="/static/mobile-app-shell.js" defer></script>
+    <script>
+      const API_BASE = window.location.origin;
+
+      marked.setOptions({ breaks: true, gfm: true });
+
+      function renderMarkdown(text) {
+        if (!text) return "";
+        return marked.parse(text);
+      }
+
+      function setDots(server, redis, ai) {
+        var dot = document.getElementById("dotHealth");
+        var label = document.getElementById("statusLabel");
+        var ready = server && redis && ai;
+        dot.classList.toggle("ok", ready);
+        if (!server) label.textContent = "Offline";
+        else if (!ready) label.textContent = "Limited";
+        else label.textContent = "Ready";
+      }
+
+      async function checkHealth() {
+        try {
+          const r = await fetch(API_BASE + "/health");
+          const d = await r.json();
+          setDots(
+            d.status === "healthy",
+            d.redis_connected,
+            d.openai_configured,
+          );
+        } catch {
+          setDots(false, false, false);
+        }
+      }
+
+      function escapeHtml(s) {
+        const d = document.createElement("div");
+        d.textContent = s;
+        return d.innerHTML;
+      }
+
+      function setAuthPageLinks() {
+        var next = encodeURIComponent(
+          window.location.pathname + window.location.search,
+        );
+        var login = document.getElementById("linkHeaderLogin");
+        var reg = document.getElementById("linkHeaderRegister");
+        if (login) login.href = "/login.html?next=" + next;
+        if (reg) reg.href = "/register.html?next=" + next;
+      }
+
+      async function refreshAuthUi() {
+        var guest = document.getElementById("headerGuestGroup");
+        var user = document.getElementById("headerUserGroup");
+        var label = document.getElementById("headerAuthUser");
+        if (!guest || !user) return;
+        if (!JUSTAuth.getToken()) {
+          guest.classList.remove("is-hidden");
+          user.classList.add("is-hidden");
+          if (label) label.textContent = "";
+          return;
+        }
+        try {
+          const r = await fetch(API_BASE + "/api/auth/me", {
+            headers: JUSTAuth.authHeaders(),
+          });
+          if (!r.ok) throw new Error("x");
+          const d = await r.json();
+          guest.classList.add("is-hidden");
+          user.classList.remove("is-hidden");
+          if (label) label.textContent = d.user.email;
+        } catch {
+          JUSTAuth.logout();
+          guest.classList.remove("is-hidden");
+          user.classList.add("is-hidden");
+          if (label) label.textContent = "";
+        }
+      }
+
+      function wireHeaderAuth() {
+        document
+          .getElementById("btnHeaderLogout")
+          .addEventListener("click", function () {
+            JUSTAuth.logout();
+            refreshAuthUi();
+          });
+      }
+
+      const MAX_IMAGE_BYTES = 4 * 1024 * 1024;
+      let pendingImage = null;
+
+      function clearPendingImage() {
+        pendingImage = null;
+        var bar = document.getElementById("imagePreviewBar");
+        var inp = document.getElementById("imageInput");
+        var btn = document.getElementById("btnAttachImage");
+        if (inp) inp.value = "";
+        if (bar) bar.classList.remove("show");
+        if (btn) btn.classList.remove("has-image");
+      }
+
+      function setPendingImage(file) {
+        if (!file || !file.type || file.type.indexOf("image/") !== 0) {
+          alert("Please choose a JPEG, PNG, WebP, or GIF image.");
+          return;
+        }
+        if (file.size > MAX_IMAGE_BYTES) {
+          alert("Image is too large (max 4 MB).");
+          return;
+        }
+        var reader = new FileReader();
+        reader.onload = function () {
+          var dataUrl = reader.result;
+          var base64 = String(dataUrl).split(",")[1] || "";
+          pendingImage = {
+            base64: base64,
+            mime: file.type,
+            previewUrl: dataUrl,
+            name: file.name,
+          };
+          document.getElementById("imagePreviewThumb").src = dataUrl;
+          document.getElementById("imagePreviewThumb").alt = file.name;
+          document.getElementById("imagePreviewMeta").textContent = file.name;
+          document.getElementById("imagePreviewBar").classList.add("show");
+          document.getElementById("btnAttachImage").classList.add("has-image");
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function wireImageUpload() {
+        document
+          .getElementById("btnAttachImage")
+          .addEventListener("click", function () {
+            document.getElementById("imageInput").click();
+          });
+        document
+          .getElementById("imageInput")
+          .addEventListener("change", function () {
+            var f = this.files && this.files[0];
+            if (f) setPendingImage(f);
+          });
+        document
+          .getElementById("btnClearImage")
+          .addEventListener("click", clearPendingImage);
+      }
+
+      async function loadFaqSuggestions() {
+        var wrap = document.getElementById("faqChips");
+        if (!wrap) return;
+        var items = [];
+        try {
+          var r = await fetch(API_BASE + "/api/faq");
+          if (r.ok) {
+            var d = await r.json();
+            items = d.suggestions || [];
+          }
+        } catch (e) {}
+        if (!items.length) {
+          items = [
+            "What are the main registration deadlines this semester?",
+            "How do I register for courses online?",
+            "What are undergraduate tuition fees?",
+            "Where can I find the academic calendar?",
+            "What programs does the Faculty of Information Technology offer?",
+          ];
+        }
+        wrap.innerHTML = "";
+        items.forEach(function (text) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "faq-chip";
+          b.setAttribute("role", "listitem");
+          b.textContent = text;
+          b.addEventListener("click", function () {
+            setQuery(text);
+          });
+          wrap.appendChild(b);
+        });
+      }
+
+      function appendChatBubble(role, text, imagePreviewUrl) {
+        const thread = document.getElementById("chatThread");
+        const row = document.createElement("div");
+        row.className = "msg-row " + (role === "user" ? "user" : "assistant");
+        const bubble = document.createElement("div");
+        bubble.className = "msg-bubble";
+        if (imagePreviewUrl) {
+          var img = document.createElement("img");
+          img.className = "msg-image";
+          img.src = imagePreviewUrl;
+          img.alt = "Uploaded image";
+          bubble.appendChild(img);
+        }
+        if (role === "assistant") {
+          var rest = document.createElement("div");
+          rest.innerHTML = renderMarkdown(text);
+          bubble.appendChild(rest);
+        } else if (text) {
+          var rest = document.createElement("div");
+          rest.innerHTML = escapeHtml(text).replace(/\n/g, "<br>");
+          bubble.appendChild(rest);
+        }
+        row.appendChild(bubble);
+        thread.appendChild(row);
+        updateFaqVisibility();
+        scrollChatToBottom();
+      }
+
+      function updateFaqVisibility() {
+        var faq = document.getElementById("faqSuggestions");
+        var thread = document.getElementById("chatThread");
+        if (!faq || !thread) return;
+        faq.style.display = thread.children.length ? "none" : "";
+      }
+
+      function adjustComposerHeight() {
+        var ta = document.getElementById("queryInput");
+        if (!ta) return;
+        ta.style.height = "auto";
+        ta.style.height = Math.min(ta.scrollHeight, 160) + "px";
+      }
+
+      function wireComposerAutosize() {
+        var ta = document.getElementById("queryInput");
+        ta.addEventListener("input", adjustComposerHeight);
+        adjustComposerHeight();
+      }
+
+      function scrollChatToBottom() {
+        var sc = document.getElementById("chatScrollArea");
+        if (sc) sc.scrollTop = sc.scrollHeight;
+      }
+
+      window.onload = function () {
+        setAuthPageLinks();
+        wireHeaderAuth();
+        refreshAuthUi();
+        checkHealth();
+        wireComposerAutosize();
+        wireImageUpload();
+        loadFaqSuggestions();
+        try {
+          var q = new URLSearchParams(window.location.search).get("q");
+          if (q) {
+            document.getElementById("queryInput").value = q;
+            document.getElementById("queryInput").focus();
+            adjustComposerHeight();
+          }
+        } catch (e) {}
+      };
+
+      function setQuery(text) {
+        document.getElementById("queryInput").value = text;
+        document.getElementById("queryInput").focus();
+        adjustComposerHeight();
+      }
+
+      /* ─── Process-panel helpers ─── */
+      var _procStepEls = [];
+      var _procHideTimer = null;
+
+      var CHECKMARK_SVG =
+        '<svg viewBox="0 0 16 16" aria-hidden="true">' +
+        '<polyline points="2,9 6,13 14,4"/></svg>';
+
+      function showProcessPanel() {
+        if (_procHideTimer) { clearTimeout(_procHideTimer); _procHideTimer = null; }
+        _procStepEls = [];
+        document.getElementById("processSteps").innerHTML = "";
+        var panel = document.getElementById("processPanel");
+        panel.classList.remove("hiding");
+        panel.hidden = false;
+      }
+
+      function hideProcessPanel() {
+        var panel = document.getElementById("processPanel");
+        if (panel.hidden) return;
+        panel.classList.add("hiding");
+        _procHideTimer = setTimeout(function () {
+          panel.hidden = true;
+          panel.classList.remove("hiding");
+          _procStepEls = [];
+        }, 280);
+      }
+
+      function _markPrevDone() {
+        if (_procStepEls.length === 0) return;
+        var prev = _procStepEls[_procStepEls.length - 1];
+        prev.classList.remove("active");
+        prev.classList.add("done");
+        var icon = prev.querySelector(".process-step-icon");
+        if (icon) {
+          icon.className = "process-step-icon done";
+          icon.innerHTML = CHECKMARK_SVG;
+        }
+      }
+
+      function _formatStepNum(index) {
+        var n = Number(index);
+        if (!n || n < 1) n = _procStepEls.length + 1;
+        return n < 10 ? "0" + n : String(n);
+      }
+
+      function upsertProcessStep(index, label, detail) {
+        _markPrevDone();
+
+        var stepsEl = document.getElementById("processSteps");
+        var row = document.createElement("div");
+        row.className = "process-step active";
+
+        var track = document.createElement("div");
+        track.className = "process-step-track";
+
+        var num = document.createElement("span");
+        num.className = "process-step-num";
+        num.textContent = _formatStepNum(index);
+
+        var icon = document.createElement("div");
+        icon.className = "process-step-icon spinning";
+
+        track.appendChild(num);
+        track.appendChild(icon);
+
+        var text = document.createElement("div");
+        text.className = "process-step-text";
+
+        var lbl = document.createElement("span");
+        lbl.className = "process-step-label";
+        lbl.textContent = label;
+        text.appendChild(lbl);
+
+        if (detail) {
+          var det = document.createElement("span");
+          det.className = "process-step-detail";
+          det.textContent = detail;
+          text.appendChild(det);
+        }
+
+        row.appendChild(track);
+        row.appendChild(text);
+        stepsEl.appendChild(row);
+        _procStepEls.push(row);
+
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            row.classList.add("ps-visible");
+            stepsEl.scrollTop = stepsEl.scrollHeight;
+            scrollChatToBottom();
+          });
+        });
+      }
+
+      function finishProcessPanel() {
+        _markPrevDone();
+        setTimeout(hideProcessPanel, 640);
+      }
+
+      async function sendQuery() {
+        const query = document.getElementById("queryInput").value.trim();
+        const sendBtn = document.getElementById("sendBtn");
+        const imageForSend = pendingImage;
+        if (!query && !imageForSend) {
+          alert("Please enter a question or attach an image.");
+          return;
+        }
+        var userLabel = query;
+        if (imageForSend && !userLabel) userLabel = "[Image]";
+        else if (imageForSend) userLabel = query + " [Image]";
+
+        appendChatBubble("user", query, imageForSend ? imageForSend.previewUrl : null);
+        document.getElementById("queryInput").value = "";
+        adjustComposerHeight();
+
+        showProcessPanel();
+        document.getElementById("errorSection").innerHTML = "";
+        sendBtn.disabled = true;
+        try {
+          clearPendingImage();
+          await sendQueryStream(query, imageForSend);
+        } catch (error) {
+          hideProcessPanel();
+          var th = document.getElementById("chatThread");
+          var last = th && th.lastElementChild;
+          if (last && last.classList.contains("assistant")) {
+            var bubble = last.querySelector(".msg-bubble");
+            if (bubble && !(bubble.textContent || "").trim()) last.remove();
+          }
+          document.getElementById("errorSection").innerHTML =
+            '<div class="error-box">' + escapeHtml(error.message) + "</div>";
+        } finally {
+          sendBtn.disabled = false;
+        }
+      }
+
+      async function sendQueryStream(query, imagePayload) {
+        const row = document.createElement("div");
+        row.className = "msg-row assistant";
+        const wrap = document.createElement("div");
+        wrap.className = "msg-bubble";
+        row.appendChild(wrap);
+        document.getElementById("chatThread").appendChild(row);
+        updateFaqVisibility();
+
+        let fullAnswer = "";
+        const reqBody = { query: query || "" };
+        if (imagePayload) {
+          reqBody.image_base64 = imagePayload.base64;
+          reqBody.image_mime_type = imagePayload.mime;
+        }
+
+        const streamHeaders = JUSTAuth.getToken()
+          ? JUSTAuth.authHeaders()
+          : { "Content-Type": "application/json" };
+
+        const response = await fetch(API_BASE + "/query/stream", {
+          method: "POST",
+          headers: streamHeaders,
+          body: JSON.stringify(reqBody),
+        });
+        if (!response.ok) {
+          const err = await response.json();
+          throw new Error(err.error || "Could not load the answer");
+        }
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split("\n\n");
+          buffer = lines.pop() || "";
+          for (const line of lines) {
+            if (!line.startsWith("data: ")) continue;
+            try {
+              const evt = JSON.parse(line.substring(6));
+              if (evt.type === "step") {
+                upsertProcessStep(evt.index, evt.label, evt.detail || "");
+              } else if (evt.type === "metadata") {
+                scrollChatToBottom();
+              } else if (evt.type === "chunk") {
+                fullAnswer += evt.content;
+                wrap.innerHTML = renderMarkdown(fullAnswer);
+                /* hide panel as soon as first text arrives */
+                if (!document.getElementById("processPanel").hidden) {
+                  finishProcessPanel();
+                }
+                scrollChatToBottom();
+              } else if (evt.type === "done") {
+                finishProcessPanel();
+              } else if (evt.type === "error") {
+                throw new Error(evt.message);
+              }
+            } catch (e) {
+              if (e instanceof SyntaxError) continue;
+              throw e;
+            }
+          }
+        }
+        if (fullAnswer) {
+          wrap.innerHTML = renderMarkdown(fullAnswer);
+        }
+        finishProcessPanel();
+        scrollChatToBottom();
+      }
+
+      document
+        .getElementById("queryInput")
+        .addEventListener("keydown", function (e) {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            sendQuery();
+          }
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,706 @@
+
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="Browse the academic calendar and set reminders after you sign in."
+    />
+    <title>Academic calendar | Student assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/assistant.css" />
+    <link rel="stylesheet" href="/static/calendar-page.css" />
+    <link rel="stylesheet" href="/static/mobile-app-shell.css" />
+  </head>
+  <body>
+    <div class="app-root" id="appRoot">
+      <aside class="sidebar" aria-label="Menu">
+        <div class="sidebar-brand">
+          <span class="brand-mark" aria-hidden="true">JUST</span>
+          <span>Student assistant</span>
+        </div>
+        <nav class="sidebar-nav">
+          <a class="nav-link" href="/assistant.html">
+            <svg
+              class="nav-ico"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Chat
+          </a>
+          <a class="nav-link" href="/planner.html">
+            <svg
+              class="nav-ico"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+              />
+              <path
+                d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M8 7h8M8 11h8M8 15h5"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+              />
+            </svg>
+            Study plan
+          </a>
+          <span class="nav-item active" aria-current="page">
+            <svg
+              class="nav-ico"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <rect
+                x="3"
+                y="4"
+                width="18"
+                height="18"
+                rx="2"
+                stroke="currentColor"
+                stroke-width="1.75"
+              />
+              <path
+                d="M16 2v4M8 2v4M3 10h18"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+              />
+            </svg>
+            Calendar
+          </span>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="sidebar-status">
+            <span class="pill" id="cachePill">List cache: —</span>
+          </div>
+          <a class="nav-link-muted" href="/admin/">Admin</a>
+        </div>
+      </aside>
+      <div class="sidebar-backdrop" id="sidebarBackdrop" aria-hidden="true"></div>
+
+      <div class="main-col">
+        <header class="main-topbar">
+          <button
+            type="button"
+            class="btn-sidebar-toggle"
+            id="btnSidebarToggle"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+          >
+            ☰
+          </button>
+          <div class="main-topbar-auth" id="calHeaderAuth">
+            <div id="calHeaderGuestGroup" class="header-auth-group">
+              <a class="main-topbar-link" href="/login.html" id="calLinkLogin">
+                <svg
+                  class="tb-ico"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="7"
+                    r="4"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                  />
+                </svg>
+                Log in
+              </a>
+              <span class="main-topbar-sep" aria-hidden="true">·</span>
+              <a
+                class="main-topbar-link"
+                href="/register.html"
+                id="calLinkRegister"
+              >
+                <svg
+                  class="tb-ico"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                  />
+                  <circle
+                    cx="9"
+                    cy="7"
+                    r="4"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                  />
+                  <path
+                    d="M22 11v6M19 14h6"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                Register
+              </a>
+            </div>
+            <div id="calHeaderUserGroup" class="header-auth-group is-hidden">
+              <span class="cal-header-user" id="calHeaderUser"></span>
+              <button type="button" class="cal-header-logout" id="calBtnLogout">
+                <svg
+                  class="tb-ico"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Log out
+              </button>
+            </div>
+          </div>
+        </header>
+        <div class="cal-scroll">
+          <div class="login-banner" id="loginBanner">
+            <strong>Reminders are tied to your account.</strong>
+            Sign in or create an account from the
+            <a id="bannerLinkLogin" href="/login.html">Log in</a>
+            or
+            <a id="bannerLinkRegister" href="/register.html">Register</a>
+            pages, or from the
+            <a href="/assistant.html">assistant</a>.
+          </div>
+          <header class="hero">
+            <div class="hero-top">
+              <div>
+                <h1>Academic calendar</h1>
+                <p>
+                  Important dates and notices from the university’s official page,
+                  organized for easier reading. Use search to filter. For reminders on
+                  this device, sign in and tap “Remind” on any event.
+                </p>
+              </div>
+            </div>
+          </header>
+
+          <div class="layout">
+            <section class="panel">
+              <h2>
+                Calendar events
+                <span class="pill" id="countPill">0 events</span>
+              </h2>
+              <div class="toolbar">
+                <div class="search">
+                  <input
+                    type="search"
+                    id="q"
+                    placeholder="Search by title, date, or category…"
+                    autocomplete="off"
+                  />
+                </div>
+                <button class="btn btn-ghost" type="button" id="btnNotify">
+                  Enable notifications
+                </button>
+              </div>
+              <div id="loadRow" class="empty" style="display: none">
+                <span class="loading" aria-hidden="true"></span>
+                Loading…
+              </div>
+              <div id="errBox" class="err" style="display: none"></div>
+              <div class="events-grid" id="grid"></div>
+              <div class="empty" id="emptyState" style="display: none">
+                No matching events. Try different search words.
+              </div>
+            </section>
+
+            <aside class="panel">
+              <h2>My reminders</h2>
+              <p class="cal-panel-note">
+                After you sign in, reminders are saved with your account and are
+                available from any browser where you use the same account.
+              </p>
+              <div class="rem-list" id="remList"></div>
+              <div class="empty" id="remEmpty" style="display: none">
+                No reminders yet. Tap “Remind” on any event.
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status"></div>
+
+    <dialog class="modal" id="dlg">
+      <form method="dialog" id="dlgForm">
+        <div class="modal-body">
+          <h3 id="dlgTitle">Reminder</h3>
+          <label for="dt">Reminder time</label>
+          <input type="datetime-local" id="dt" required />
+          <p
+            style="margin: 0; font-size: 0.82rem; color: var(--muted)"
+            id="dlgHint"
+          ></p>
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-ghost" type="button" id="dlgCancel">
+            Cancel
+          </button>
+          <button class="btn btn-primary" type="submit" id="dlgSave">
+            Save reminder
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="/static/auth.js"></script>
+    <script src="/static/mobile-app-shell.js" defer></script>
+    <script>
+      const API = "";
+      const CATEGORY_LABELS = {
+        registration: "Registration",
+        exams: "Exams",
+        holiday: "Holiday",
+        semester: "Semester",
+        general: "General",
+        other: "Other",
+        تسجيل: "Registration",
+        امتحانات: "Exams",
+        عطلة: "Holiday",
+        فصل_دراسي: "Semester",
+        موعد_عام: "General",
+        أخرى: "Other",
+      };
+      function calendarCategoryLabel(cat) {
+        if (!cat) return CATEGORY_LABELS.general;
+        return CATEGORY_LABELS[cat] || cat;
+      }
+      let events = [];
+      let pick = null;
+      const notified = new Set(
+        JSON.parse(sessionStorage.getItem("just_cal_notified") || "[]"),
+      );
+
+      function persistNotified() {
+        sessionStorage.setItem(
+          "just_cal_notified",
+          JSON.stringify([...notified]),
+        );
+      }
+
+      function setCalAuthPageLinks() {
+        var next = encodeURIComponent("/calendar-reminders.html");
+        var login = document.getElementById("calLinkLogin");
+        var reg = document.getElementById("calLinkRegister");
+        var bl = document.getElementById("bannerLinkLogin");
+        var br = document.getElementById("bannerLinkRegister");
+        if (login) login.href = "/login.html?next=" + next;
+        if (reg) reg.href = "/register.html?next=" + next;
+        if (bl) bl.href = "/login.html?next=" + next;
+        if (br) br.href = "/register.html?next=" + next;
+      }
+
+      async function updateCalAuthUi() {
+        const banner = document.getElementById("loginBanner");
+        const guest = document.getElementById("calHeaderGuestGroup");
+        const user = document.getElementById("calHeaderUserGroup");
+        const userEl = document.getElementById("calHeaderUser");
+        if (!guest || !user || !banner) return;
+        if (!JUSTAuth.getToken()) {
+          banner.style.display = "block";
+          guest.classList.remove("is-hidden");
+          user.classList.add("is-hidden");
+          if (userEl) userEl.textContent = "";
+          return;
+        }
+        try {
+          const r = await fetch(API + "/api/auth/me", {
+            headers: JUSTAuth.authHeaders(),
+          });
+          if (!r.ok) throw new Error("x");
+          const d = await r.json();
+          banner.style.display = "none";
+          guest.classList.add("is-hidden");
+          user.classList.remove("is-hidden");
+          if (userEl) userEl.textContent = d.user.email;
+        } catch (e) {
+          JUSTAuth.logout();
+          banner.style.display = "block";
+          guest.classList.remove("is-hidden");
+          user.classList.add("is-hidden");
+          if (userEl) userEl.textContent = "";
+        }
+      }
+
+      function wireCalHeaderAuth() {
+        document
+          .getElementById("calBtnLogout")
+          .addEventListener("click", () => {
+            JUSTAuth.logout();
+            updateCalAuthUi();
+            loadReminders();
+          });
+      }
+      function toast(msg) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        clearTimeout(toast._h);
+        toast._h = setTimeout(() => t.classList.remove("show"), 3200);
+      }
+
+      function fmtLocal(iso) {
+        if (!iso) return "—";
+        const d = new Date(iso);
+        if (Number.isNaN(d.getTime())) return iso;
+        return d.toLocaleString("en-US", {
+          dateStyle: "medium",
+          timeStyle: "short",
+        });
+      }
+
+      function formatCacheTtlShort(seconds) {
+        if (seconds == null || Number.isNaN(seconds)) return "soon";
+        const s = Math.max(0, Number(seconds));
+        if (s >= 48 * 3600) {
+          const d = Math.max(1, Math.round(s / 86400));
+          return "~" + d + " day" + (d === 1 ? "" : "s");
+        }
+        if (s >= 3600) {
+          const h = Math.max(1, Math.round(s / 3600));
+          return "~" + h + " hour" + (h === 1 ? "" : "s");
+        }
+        const mins = Math.max(1, Math.round(s / 60));
+        return "~" + mins + " min";
+      }
+
+      function setCachePill(data) {
+        const el = document.getElementById("cachePill");
+        if (data.cached) {
+          const s = data.cache_ttl_seconds_remaining;
+          el.textContent =
+            "Cached list · auto-refresh in " + formatCacheTtlShort(s);
+          el.classList.add("ok");
+        } else {
+          el.textContent = "Fetched a fresh list from the official site";
+          el.classList.add("ok");
+        }
+      }
+
+      function renderEvents(filter) {
+        const q = (filter || "").trim().toLowerCase();
+        const grid = document.getElementById("grid");
+        const empty = document.getElementById("emptyState");
+        grid.innerHTML = "";
+        const list = events.filter((e) => {
+          if (!q) return true;
+          const blob = [
+            e.title_ar,
+            e.date_note_ar,
+            e.category,
+            e.details_ar,
+            e.start_date,
+            e.end_date,
+            e.id,
+          ]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase();
+          return blob.includes(q);
+        });
+        document.getElementById("countPill").textContent = list.length + " events";
+        if (!list.length) {
+          empty.style.display = "block";
+          return;
+        }
+        empty.style.display = "none";
+        for (const e of list) {
+          const div = document.createElement("div");
+          div.className = "event-card";
+          const h3 = document.createElement("h3");
+          h3.textContent = e.title_ar || "Untitled";
+          div.appendChild(h3);
+          const meta = document.createElement("div");
+          meta.className = "meta";
+          const tag = document.createElement("span");
+          tag.className = "tag";
+          tag.textContent = calendarCategoryLabel(e.category);
+          meta.appendChild(tag);
+          const span = document.createElement("span");
+          span.textContent = e.date_note_ar || "";
+          meta.appendChild(span);
+          div.appendChild(meta);
+          if (e.details_ar) {
+            const p = document.createElement("p");
+            p.style.margin = "0";
+            p.style.fontSize = "0.88rem";
+            p.style.color = "var(--muted)";
+            p.textContent = e.details_ar;
+            div.appendChild(p);
+          }
+          const actions = document.createElement("div");
+          actions.className = "event-actions";
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "btn-sm";
+          b.textContent = "Remind";
+          b.addEventListener("click", () => openDlg(e.id));
+          actions.appendChild(b);
+          div.appendChild(actions);
+          grid.appendChild(div);
+        }
+      }
+
+      function toDatetimeLocalValue(d) {
+        const pad = (n) => String(n).padStart(2, "0");
+        return (
+          d.getFullYear() +
+          "-" +
+          pad(d.getMonth() + 1) +
+          "-" +
+          pad(d.getDate()) +
+          "T" +
+          pad(d.getHours()) +
+          ":" +
+          pad(d.getMinutes())
+        );
+      }
+
+      function openDlg(eventId) {
+        if (!JUSTAuth.getToken()) {
+          toast("Sign in to save reminders");
+          document
+            .getElementById("loginBanner")
+            .scrollIntoView({ behavior: "smooth" });
+          return;
+        }
+        const e = events.find((x) => x.id === eventId);
+        if (!e) return;
+        pick = e;
+        document.getElementById("dlgTitle").textContent =
+          "Reminder: " + (e.title_ar || "");
+        document.getElementById("dlgHint").textContent =
+          (e.date_note_ar || "") + (e.start_date ? " · " + e.start_date : "");
+        const dt = document.getElementById("dt");
+        const now = new Date();
+        dt.min = toDatetimeLocalValue(now);
+        dt.value = toDatetimeLocalValue(now);
+        document.getElementById("dlg").showModal();
+      }
+
+      document.getElementById("dlgCancel").addEventListener("click", () => {
+        document.getElementById("dlg").close();
+      });
+
+      document
+        .getElementById("dlgForm")
+        .addEventListener("submit", async (ev) => {
+          ev.preventDefault();
+          if (!pick) return;
+          const raw = document.getElementById("dt").value;
+          if (!raw) return;
+          const iso = new Date(raw).toISOString();
+          try {
+            const res = await fetch(API + "/api/calendar/reminders", {
+              method: "POST",
+              headers: JUSTAuth.authHeaders(),
+              body: JSON.stringify({
+                event_id: pick.id,
+                title_ar: pick.title_ar,
+                remind_at: iso,
+              }),
+            });
+            const j = await res.json();
+            if (!res.ok) throw new Error(j.error || "Save failed");
+            document.getElementById("dlg").close();
+            toast("Reminder saved");
+            loadReminders();
+          } catch (e) {
+            toast(String(e.message || e));
+          }
+        });
+
+      async function loadEvents() {
+        const err = document.getElementById("errBox");
+        const loadRow = document.getElementById("loadRow");
+        err.style.display = "none";
+        loadRow.style.display = "block";
+        try {
+          const res = await fetch(API + "/api/calendar/events");
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || "Error");
+          events = Array.isArray(data.events) ? data.events : [];
+          setCachePill(data);
+          renderEvents(document.getElementById("q").value);
+        } catch (e) {
+          err.textContent = String(e.message || e);
+          err.style.display = "block";
+        } finally {
+          loadRow.style.display = "none";
+        }
+      }
+
+      async function loadReminders() {
+        const box = document.getElementById("remList");
+        const empty = document.getElementById("remEmpty");
+        box.innerHTML = "";
+        if (!JUSTAuth.getToken()) {
+          empty.style.display = "block";
+          return;
+        }
+        try {
+          const res = await fetch(API + "/api/calendar/reminders", {
+            headers: JUSTAuth.authHeaders(),
+          });
+          if (!res.ok) {
+            empty.style.display = "block";
+            return;
+          }
+          const data = await res.json();
+          const list = data.reminders || [];
+          if (!list.length) {
+            empty.style.display = "block";
+            return;
+          }
+          empty.style.display = "none";
+          for (const r of list.sort(
+            (a, b) => new Date(a.remind_at) - new Date(b.remind_at),
+          )) {
+            const div = document.createElement("div");
+            div.className = "rem-item";
+            const strong = document.createElement("strong");
+            strong.textContent = r.title_ar || "";
+            div.appendChild(strong);
+            const small = document.createElement("small");
+            small.textContent = fmtLocal(r.remind_at);
+            div.appendChild(small);
+            const del = document.createElement("button");
+            del.type = "button";
+            del.textContent = "Delete";
+            const rid = r.reminder_id;
+            del.addEventListener("click", async () => {
+              const res = await fetch(
+                API + "/api/calendar/reminders/" + encodeURIComponent(rid),
+                { method: "DELETE", headers: JUSTAuth.authHeaders() },
+              );
+              if (res.ok) {
+                toast("Deleted");
+                loadReminders();
+              }
+            });
+            div.appendChild(del);
+            box.appendChild(div);
+          }
+        } catch (_) {
+          empty.style.display = "block";
+        }
+      }
+
+      function checkDueReminders(list) {
+        if (
+          !("Notification" in window) ||
+          Notification.permission !== "granted"
+        )
+          return;
+        const now = Date.now();
+        for (const r of list) {
+          const t = new Date(r.remind_at).getTime();
+          if (Number.isNaN(t) || t > now) continue;
+          if (notified.has(r.reminder_id)) continue;
+          notified.add(r.reminder_id);
+          persistNotified();
+          try {
+            new Notification("Calendar reminder", {
+              body: r.title_ar,
+              lang: "en",
+            });
+          } catch (_) {}
+          toast("Reminder: " + r.title_ar);
+        }
+      }
+
+      document.getElementById("q").addEventListener("input", (e) => {
+        renderEvents(e.target.value);
+      });
+      document
+        .getElementById("btnNotify")
+        .addEventListener("click", async () => {
+          if (!("Notification" in window)) {
+            toast("This browser does not support notifications");
+            return;
+          }
+          const p = await Notification.requestPermission();
+          toast(p === "granted" ? "Notifications enabled" : "Permission not granted");
+        });
+
+      setInterval(async () => {
+        if (!JUSTAuth.getToken()) return;
+        try {
+          const res = await fetch(API + "/api/calendar/reminders", {
+            headers: JUSTAuth.authHeaders(),
+          });
+          const data = await res.json();
+          checkDueReminders(data.reminders || []);
+        } catch (_) {}
+      }, 45000);
+
+      setCalAuthPageLinks();
+      wireCalHeaderAuth();
+      updateCalAuthUi().then(() => {
+        loadEvents();
+        loadReminders();
+      });
+    </script>
+  </body>
+</html>

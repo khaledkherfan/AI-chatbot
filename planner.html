@@ -1,0 +1,1901 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="Plan courses with advisory help using one official study-plan PDF per major from resources.json."
+    />
+    <title>Study plan | Student assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/assistant.css" />
+    <link rel="stylesheet" href="/static/planner-page.css" />
+    <link rel="stylesheet" href="/static/mobile-app-shell.css" />
+  </head>
+  <body>
+    <div class="app-root" id="appRoot">
+      <aside class="sidebar" aria-label="Main menu">
+        <div class="sidebar-brand">
+          <span class="brand-mark" aria-hidden="true">JUST</span>
+          <span>Student assistant</span>
+        </div>
+        <nav class="sidebar-nav">
+          <a class="nav-link" href="/assistant.html">
+            <svg
+              class="nav-ico"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Chat
+          </a>
+          <span class="nav-item active" aria-current="page">
+            <svg
+              class="nav-ico"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+              />
+              <path
+                d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M8 7h8M8 11h8M8 15h5"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+              />
+            </svg>
+            Study plan
+          </span>
+          <a class="nav-link" href="/calendar-reminders.html">
+            <svg
+              class="nav-ico"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <rect
+                x="3"
+                y="4"
+                width="18"
+                height="18"
+                rx="2"
+                stroke="currentColor"
+                stroke-width="1.75"
+              />
+              <path
+                d="M16 2v4M8 2v4M3 10h18"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+              />
+            </svg>
+            Calendar
+          </a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="sidebar-status" id="sidebarStatus" title="Service status">
+            <span class="status-dot" id="dotHealth"></span>
+            <span id="statusLabel">Checking…</span>
+          </div>
+          <a class="nav-link-muted" href="/admin/">Admin</a>
+        </div>
+      </aside>
+      <div class="sidebar-backdrop" id="sidebarBackdrop" aria-hidden="true"></div>
+
+      <div class="main-col">
+        <header class="main-topbar">
+          <button
+            type="button"
+            class="btn-sidebar-toggle"
+            id="btnSidebarToggle"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+          >
+            ☰
+          </button>
+          <div class="main-topbar-auth" id="headerAuth">
+            <div id="headerGuestGroup" class="header-auth-group">
+              <a
+                class="main-topbar-link"
+                href="/login.html"
+                id="linkHeaderLogin"
+              >
+                <svg
+                  class="tb-ico"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="7"
+                    r="4"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                  />
+                </svg>
+                Log in
+              </a>
+              <span class="main-topbar-sep" aria-hidden="true">·</span>
+              <a
+                class="main-topbar-link"
+                href="/register.html"
+                id="linkHeaderRegister"
+              >
+                <svg
+                  class="tb-ico"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                  />
+                  <circle
+                    cx="9"
+                    cy="7"
+                    r="4"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                  />
+                  <path
+                    d="M22 11v6M19 14h6"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                Register
+              </a>
+            </div>
+            <div id="headerUserGroup" class="header-auth-group is-hidden">
+              <span class="header-user-email" id="headerAuthUser"></span>
+              <button
+                type="button"
+                class="header-logout-btn"
+                id="btnHeaderLogout"
+              >
+                <svg
+                  class="tb-ico"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Log out
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <div class="main-body-stack">
+          <div class="planner-page-scroll">
+            <div class="planner-hero-pro">
+              <h1>Your study plan</h1>
+              <p>
+                Pick your major — each program uses one official study-plan PDF from
+                <code>resources.json</code>. The assistant and the plan link use that same document.
+              </p>
+              <p class="planner-hero-meta">
+                For general university questions go to
+                <a href="/assistant.html">Chat</a>.
+              </p>
+            </div>
+
+            <section
+              id="panel-planner"
+              class="panel active"
+              role="region"
+              aria-label="Study plan"
+            >
+              <div class="planner-shell">
+                <div class="planner-layout">
+                  <aside
+                    class="planner-rail"
+                    aria-label="Plan settings and assistant"
+                  >
+                    <div class="planner-step-card">
+                      <div class="step-head">
+                        <span class="step-num" aria-hidden="true">1</span>
+                        <div>
+                          <h3>Academic program</h3>
+                          <p class="step-desc">
+                            One official study-plan PDF per major (from resources.json). The link below and the assistant both use it.
+                          </p>
+                        </div>
+                      </div>
+                      <label class="field-label" for="programSelect"
+                        >Major (Faculty of Information Technology)</label
+                      >
+                      <select id="programSelect" class="select-field"></select>
+                      <div class="plan-links-stack" style="margin-top: 0.65rem">
+                        <a
+                          id="planOfficialLink"
+                          class="plan-link"
+                          href="#"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style="display: none"
+                        >
+                          Official study plan (PDF) ↗
+                        </a>
+                      </div>
+                      <p class="field-label" style="margin-top: 1rem">
+                        General tips
+                      </p>
+                      <ul class="req-list-compact" id="reqList"></ul>
+                    </div>
+
+                    <div class="planner-step-card">
+                      <div class="step-head">
+                        <span class="step-num" aria-hidden="true">2</span>
+                        <div>
+                          <h3>Your schedule request</h3>
+                          <p class="step-desc">
+                            Describe how you want courses distributed, whether you want a summer term,
+                            and roughly how many credits per regular semester — that is sent to the assistant with your data.
+                          </p>
+                        </div>
+                      </div>
+                      <div class="ai-form-grid">
+                        <div
+                          class="planner-prompt-block"
+                          style="grid-column: 1 / -1"
+                        >
+                          <label class="field-label" for="aiSchedulePrompt"
+                            >Describe the schedule you want (for the assistant)</label
+                          >
+                          <textarea
+                            id="aiSchedulePrompt"
+                            rows="4"
+                            class="chat-input"
+                            style="min-height: 6.5rem; resize: vertical"
+                            placeholder="Example: focus on core courses in the first two years, defer electives, avoid four heavy courses in one term, prefer summer math…"
+                          ></textarea>
+                        </div>
+                        <div
+                          class="planner-prefs-row"
+                          style="
+                            grid-column: 1 / -1;
+                            display: flex;
+                            flex-wrap: wrap;
+                            align-items: center;
+                            gap: 0.65rem 1.25rem;
+                            padding: 0.5rem 0;
+                          "
+                        >
+                          <label
+                            style="
+                              display: inline-flex;
+                              align-items: center;
+                              gap: 0.4rem;
+                              cursor: pointer;
+                              font-size: 0.92rem;
+                            "
+                          >
+                            <input type="checkbox" id="aiUseSummer" checked />
+                            <span
+                              >Include the summer term in the suggestion</span
+                            >
+                          </label>
+                          <div
+                            id="summerHoursWrap"
+                            style="
+                              display: inline-flex;
+                              align-items: center;
+                              gap: 0.35rem;
+                            "
+                          >
+                            <label
+                              class="field-label"
+                              for="aiSummerMaxHours"
+                              style="margin: 0"
+                              >Summer credit cap</label
+                            >
+                            <input
+                              type="number"
+                              id="aiSummerMaxHours"
+                              min="1"
+                              max="10"
+                              value="10"
+                              class="chat-input"
+                              style="
+                                width: 4.5rem;
+                                min-height: auto;
+                                padding: 0.45rem;
+                              "
+                            />
+                            <span
+                              style="font-size: 0.82rem; color: var(--muted)"
+                              >(1–10)</span
+                            >
+                          </div>
+                        </div>
+                        <div>
+                          <label class="field-label" for="aiHoursPerRegularSem"
+                            >Target credits per regular semester</label
+                          >
+                          <input
+                            type="number"
+                            id="aiHoursPerRegularSem"
+                            min="6"
+                            max="22"
+                            value="16"
+                            class="chat-input"
+                            style="min-height: auto; padding: 0.55rem"
+                          />
+                        </div>
+                        <div>
+                          <label class="field-label" for="aiCompletedHours"
+                            >Completed credits (approx.)</label
+                          >
+                          <input
+                            type="number"
+                            id="aiCompletedHours"
+                            min="0"
+                            max="200"
+                            value="0"
+                            class="chat-input"
+                            style="min-height: auto; padding: 0.55rem"
+                          />
+                        </div>
+                        <div>
+                          <label class="field-label" for="aiTargetHours"
+                            >Total credit target</label
+                          >
+                          <input
+                            type="number"
+                            id="aiTargetHours"
+                            min="1"
+                            max="200"
+                            value="132"
+                            class="chat-input"
+                            style="min-height: auto; padding: 0.55rem"
+                          />
+                        </div>
+                        <div>
+                          <label class="field-label" for="aiYears"
+                            >Years to graduation</label
+                          >
+                          <input
+                            type="number"
+                            id="aiYears"
+                            min="3"
+                            max="7"
+                            value="4"
+                            step="0.5"
+                            class="chat-input"
+                            style="min-height: auto; padding: 0.55rem"
+                          />
+                        </div>
+                        <div
+                          class="planner-prompt-block"
+                          style="grid-column: 1 / -1"
+                        >
+                          <label class="field-label" for="aiExtraNotes"
+                            >Extra notes (optional)</label
+                          >
+                          <textarea
+                            id="aiExtraNotes"
+                            rows="2"
+                            class="chat-input"
+                            style="min-height: auto; resize: vertical"
+                            placeholder="Completed courses by code, registration constraints, other preferences…"
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="planner-step-card ai-plan-card">
+                      <div class="step-head">
+                        <span class="step-num" aria-hidden="true">3</span>
+                        <div>
+                          <h3>Assistant suggestion</h3>
+                          <p class="ai-plan-intro">
+                            Builds an advisory schedule from your data. After the reply you can merge suggested courses into the grid below when the text lists them clearly.
+                          </p>
+                        </div>
+                      </div>
+                      <div class="planner-ai-actions">
+                        <button
+                          type="button"
+                          class="btn btn-primary btn-accent"
+                          id="btnAiFullPlan"
+                        >
+                          Suggest full plan
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          id="btnAiAssistPlan"
+                        >
+                          Improve current draft
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          id="btnApplyAiJson"
+                        >
+                          Merge suggestion into grid
+                        </button>
+                      </div>
+                      <div
+                        class="loading planner-loading-modern"
+                        id="plannerAiLoading"
+                      >
+                        <div class="typing-indicator" aria-hidden="true">
+                          <span></span><span></span><span></span>
+                        </div>
+                        <p class="chat-loading-text">Preparing suggestion…</p>
+                      </div>
+                      <div class="planner-ai-response" id="plannerAiResponse">
+                        <div
+                          class="response-head"
+                          style="
+                            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+                          "
+                        >
+                          <h2 style="margin: 0; font-size: 1rem">Latest reply</h2>
+                        </div>
+                        <div
+                          class="planner-answer-box"
+                          id="plannerAnswerBox"
+                        ></div>
+                        <div
+                          class="planner-json-wrap"
+                          id="plannerJsonWrap"
+                          hidden
+                          aria-hidden="true"
+                        >
+                          <pre class="json-pre" id="plannerJsonBox"></pre>
+                        </div>
+                      </div>
+                    </div>
+                  </aside>
+
+                  <div class="planner-board-column">
+                    <div class="card planner-card semester-board">
+                      <div class="card-body">
+                        <div class="step-head" style="margin-bottom: 0.75rem">
+                          <span class="step-num" aria-hidden="true">4</span>
+                          <div>
+                            <h3
+                              style="
+                                margin: 0;
+                                font-size: 1.05rem;
+                                color: var(--navy-mid);
+                              "
+                            >
+                              Semester grid
+                            </h3>
+                            <p
+                              style="
+                                margin: 0.35rem 0 0;
+                                font-size: 0.88rem;
+                                color: var(--muted);
+                              "
+                            >
+                              Eight regular semesters plus a
+                              <strong>summer</strong> term capped at
+                              <strong>10</strong> credits. Rename semesters, clear one,
+                              and edit courses from each card. Saved locally in your browser.
+                            </p>
+                          </div>
+                        </div>
+                        <div class="planner-course-add">
+                          <div class="add-row add-row--courses">
+                            <div class="add-field">
+                              <label class="field-label" for="courseCode"
+                                >Course code</label
+                              >
+                              <input
+                                type="text"
+                                id="courseCode"
+                                placeholder="e.g. CS321"
+                                dir="ltr"
+                                autocomplete="off"
+                              />
+                            </div>
+                            <div class="add-field">
+                              <label class="field-label" for="courseCredits"
+                                >Credits</label
+                              >
+                              <input
+                                type="number"
+                                id="courseCredits"
+                                min="0"
+                                max="12"
+                                step="1"
+                                value="3"
+                              />
+                            </div>
+                            <div class="add-field">
+                              <label class="field-label" for="semesterPick"
+                                >Semester</label
+                              >
+                              <select
+                                id="semesterPick"
+                                class="select-field"
+                              ></select>
+                            </div>
+                            <button
+                              type="button"
+                              class="btn btn-primary btn-add-plan"
+                              id="btnAddCourse"
+                            >
+                              Add to grid
+                            </button>
+                          </div>
+                          <div class="add-row add-row--course-extras">
+                            <div class="add-field">
+                              <label class="field-label" for="courseTitle"
+                                >Course title (optional)</label
+                              >
+                              <input
+                                type="text"
+                                id="courseTitle"
+                                placeholder="Shown next to the code on the card"
+                                autocomplete="off"
+                              />
+                            </div>
+                            <div class="add-field">
+                              <label class="field-label" for="courseKind"
+                                >Course type</label
+                              >
+                              <select id="courseKind" class="select-field">
+                                <option value="regular">Regular</option>
+                                <option value="elective">Elective</option>
+                                <option value="graduation">Project / graduation</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="sem-grid" id="semGrid"></div>
+
+                        <div class="stat-row">
+                          <div class="stat">
+                            Planned credits total:
+                            <span id="totalCredits">0</span>
+                          </div>
+                          <div class="stat">
+                            Number of courses: <span id="courseCount">0</span>
+                          </div>
+                        </div>
+
+                        <div
+                          style="
+                            margin-top: 1rem;
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 0.5rem;
+                          "
+                        >
+                          <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="btnPrintPlan"
+                          >
+                            Print / save PDF
+                          </button>
+                          <button
+                            type="button"
+                            class="btn"
+                            style="
+                              background: var(--surface-2);
+                              border: 1px solid var(--border);
+                            "
+                            id="btnClearPlan"
+                          >
+                            Clear local draft
+                          </button>
+                          <button
+                            type="button"
+                            class="btn"
+                            style="
+                              background: var(--surface-2);
+                              border: 1px solid var(--border);
+                            "
+                            id="btnAskFromPlan"
+                          >
+                            Ask the assistant about this major
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <p class="footer-note">
+              Guidance does not replace official university decisions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="planPdfExportHost" class="plan-pdf-export-host" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="/static/auth.js"></script>
+    <script src="/static/mobile-app-shell.js" defer></script>
+    <script>
+      const API_BASE = window.location.origin;
+      const STORAGE_KEY = "just_academic_plan_v1";
+
+      const DEFAULT_PROGRAM_ID = "se";
+
+      /** Official study-plan PDFs — loaded from GET /api/planner/study-plans (resources.json). */
+      let STUDY_PLAN_PDFS = {
+        Software_Engineering_Plan:
+          "https://www.just.edu.jo/FacultiesandDepartments/it/Departments/SE/SiteAssets/Pages/Programs/SE_English_StudyPlan2025_12OCT2025.pdf",
+        Robotics_Plan:
+          "https://www.just.edu.jo/FacultiesandDepartments/it/Departments/SE/Documents/Robo_Study%20Plan_In_English.pdf",
+        Cybersecurity_Plan:
+          "https://www.just.edu.jo/FacultiesandDepartments/it/Departments/CyberSec/PublishingImages/Pages/Programs/Study%20Plan%20_%20Cybersecurity%20-English%20_FINAL_Oct2025.pdf",
+        Computer_Science_Plan:
+          "https://www.just.edu.jo/FacultiesandDepartments/it/Departments/cs/SiteAssets/Pages/Programs/CS%20Study%20Plan%202021%20-%20English%205-10-2021.pdf",
+        Artificial_Intelligence_Plan:
+          "https://www.just.edu.jo/FacultiesandDepartments/it/Departments/cs/SiteAssets/Pages/Programs/AI-English-StudyPlan-Final2024.pdf",
+      };
+
+      async function loadStudyPlanPdfsFromServer() {
+        try {
+          var r = await fetch(API_BASE + "/api/planner/study-plans");
+          if (!r.ok) return;
+          var d = await r.json();
+          if (d && d.plans && typeof d.plans === "object") {
+            STUDY_PLAN_PDFS = d.plans;
+          }
+        } catch (e) {
+          /* keep embedded fallback URLs */
+        }
+      }
+
+      function officialStudyPlanPdfUrl(p) {
+        if (!p || !p.resourceKey) return "";
+        return STUDY_PLAN_PDFS[p.resourceKey] || "";
+      }
+
+      function getSelectedProgram() {
+        var pid = document.getElementById("programSelect").value;
+        return PROGRAMS.find(function (x) {
+          return x.id === pid;
+        });
+      }
+
+      const PROGRAMS = [
+        {
+          id: "se",
+          resourceKey: "Software_Engineering_Plan",
+          nameAr: "Software Engineering",
+          nameEn: "Software Engineering",
+          typicalCredits: 132,
+          reqs: [
+            "Complete university requirements (Arabic, English, computing, etc.) per regulations.",
+            "College requirements: core, major electives, graduation project when required.",
+            "Review prerequisites before registration.",
+          ],
+        },
+        {
+          id: "cs",
+          resourceKey: "Computer_Science_Plan",
+          nameAr: "Computer Science",
+          nameEn: "Computer Science",
+          typicalCredits: 132,
+          reqs: [
+            "Follow the official CS study plan PDF for your cohort.",
+            "Spread credits across levels according to prerequisites.",
+            "Consult your advisor before changing an elective track.",
+          ],
+        },
+        {
+          id: "ai",
+          resourceKey: "Artificial_Intelligence_Plan",
+          nameAr: "Artificial Intelligence",
+          nameEn: "Artificial Intelligence",
+          typicalCredits: 132,
+          reqs: [
+            "Follow the official AI study plan PDF from the CS department.",
+            "Check prerequisites before registering core and elective AI courses.",
+          ],
+        },
+        {
+          id: "cyber",
+          resourceKey: "Cybersecurity_Plan",
+          nameAr: "Cybersecurity",
+          nameEn: "Cybersecurity",
+          typicalCredits: 132,
+          reqs: [
+            "Follow the official Cybersecurity study plan PDF.",
+            "Plan internships according to department announcements.",
+          ],
+        },
+        {
+          id: "robotics",
+          resourceKey: "Robotics_Plan",
+          nameAr: "Robotics",
+          nameEn: "Robotics",
+          typicalCredits: 132,
+          reqs: [
+            "Follow the official Robotics study plan PDF from the SE department.",
+            "Balance hardware, control, and software courses per prerequisites.",
+          ],
+        },
+      ];
+
+      marked.setOptions({ breaks: true, gfm: true });
+
+      function renderMarkdown(text) {
+        if (!text) return "";
+        return marked.parse(text);
+      }
+
+      function escapeHtml(s) {
+        const d = document.createElement("div");
+        d.textContent = s;
+        return d.innerHTML;
+      }
+
+      function setDots(server, redis, ai) {
+        var dot = document.getElementById("dotHealth");
+        var label = document.getElementById("statusLabel");
+        if (!dot || !label) return;
+        var ready = server && redis && ai;
+        dot.classList.toggle("ok", ready);
+        if (!server) {
+          label.textContent = "Cannot reach service";
+        } else if (!ready) {
+          label.textContent = "Limited mode";
+        } else {
+          label.textContent = "Ready";
+        }
+      }
+
+      async function checkHealth() {
+        try {
+          const r = await fetch(API_BASE + "/health");
+          const d = await r.json();
+          setDots(
+            d.status === "healthy",
+            d.redis_connected,
+            d.openai_configured,
+          );
+        } catch (err) {
+          setDots(false, false, false);
+        }
+      }
+
+      function setAuthPageLinks() {
+        var next = encodeURIComponent(
+          window.location.pathname + window.location.search,
+        );
+        var login = document.getElementById("linkHeaderLogin");
+        var reg = document.getElementById("linkHeaderRegister");
+        if (login) login.href = "/login.html?next=" + next;
+        if (reg) reg.href = "/register.html?next=" + next;
+      }
+
+      async function refreshAuthUi() {
+        var guest = document.getElementById("headerGuestGroup");
+        var user = document.getElementById("headerUserGroup");
+        var label = document.getElementById("headerAuthUser");
+        if (!guest || !user) return;
+        if (!JUSTAuth.getToken()) {
+          guest.classList.remove("is-hidden");
+          user.classList.add("is-hidden");
+          if (label) label.textContent = "";
+          return;
+        }
+        try {
+          const r = await fetch(API_BASE + "/api/auth/me", {
+            headers: JUSTAuth.authHeaders(),
+          });
+          if (!r.ok) throw new Error("x");
+          const d = await r.json();
+          guest.classList.add("is-hidden");
+          user.classList.remove("is-hidden");
+          if (label) label.textContent = d.user.email;
+        } catch (e) {
+          JUSTAuth.logout();
+          guest.classList.remove("is-hidden");
+          user.classList.add("is-hidden");
+          if (label) label.textContent = "";
+        }
+      }
+
+      function wireHeaderAuth() {
+        document
+          .getElementById("btnHeaderLogout")
+          .addEventListener("click", function () {
+            JUSTAuth.logout();
+            refreshAuthUi();
+          });
+      }
+
+      var _programListenerAttached = false;
+
+      function refreshPlanLinkForProgram(p) {
+        var link = document.getElementById("planOfficialLink");
+        if (!p || !link) return;
+        var pdfUrl = officialStudyPlanPdfUrl(p);
+        if (pdfUrl) {
+          link.style.display = "";
+          link.href = pdfUrl;
+          link.title = p.resourceKey || "Official study plan PDF";
+        } else {
+          link.style.display = "none";
+          link.href = "#";
+          link.title = "";
+        }
+      }
+
+      function fillProgramSelect() {
+        const sel = document.getElementById("programSelect");
+        sel.innerHTML = PROGRAMS.map(function (p) {
+          return (
+            '<option value="' +
+            p.id +
+            '">' +
+            escapeHtml(p.nameEn || p.nameAr) +
+            "</option>"
+          );
+        }).join("");
+        if (!_programListenerAttached) {
+          _programListenerAttached = true;
+          sel.addEventListener("change", function () {
+            updateProgramUi();
+            savePlanState();
+          });
+        }
+      }
+
+      function updateProgramUi() {
+        const id = document.getElementById("programSelect").value;
+        const p = PROGRAMS.find(function (x) {
+          return x.id === id;
+        });
+        if (!p) return;
+        refreshPlanLinkForProgram(p);
+        document.getElementById("reqList").innerHTML = p.reqs
+          .map(function (r) {
+            return "<li>" + escapeHtml(r) + "</li>";
+          })
+          .join("");
+      }
+
+      const SUMMER_SEM_KEY = "summer";
+      const SUMMER_MAX_CREDITS = 10;
+      const DEFAULT_REGULAR_SEMESTER_COUNT = 8;
+
+      function defaultSemesterKeys() {
+        var keys = [];
+        for (var i = 1; i <= DEFAULT_REGULAR_SEMESTER_COUNT; i++) {
+          keys.push("s" + i);
+        }
+        keys.push(SUMMER_SEM_KEY);
+        return keys;
+      }
+
+      function defaultSemesterLabelsObject() {
+        var o = {};
+        for (var i = 1; i <= DEFAULT_REGULAR_SEMESTER_COUNT; i++) {
+          o["s" + i] = "Semester " + i;
+        }
+        o[SUMMER_SEM_KEY] = "Summer";
+        return o;
+      }
+
+      function ensureSemesterStateShape() {
+        if (
+          !planState.semesterLabels ||
+          typeof planState.semesterLabels !== "object"
+        ) {
+          planState.semesterLabels = defaultSemesterLabelsObject();
+        }
+        var defs = defaultSemesterLabelsObject();
+        defaultSemesterKeys().forEach(function (ky) {
+          if (!planState.semesters[ky]) planState.semesters[ky] = [];
+          if (!planState.semesterLabels[ky])
+            planState.semesterLabels[ky] = defs[ky];
+        });
+      }
+
+      function semesterCreditsSum(semKey) {
+        return (planState.semesters[semKey] || []).reduce(function (a, c) {
+          return a + (Number(c.cr) || 0);
+        }, 0);
+      }
+
+      function refreshCreditInputMaxForSem() {
+        var pickEl = document.getElementById("semesterPick");
+        var inp = document.getElementById("courseCredits");
+        if (!inp || !pickEl) return;
+        var pick = pickEl.value;
+        if (pick === SUMMER_SEM_KEY) {
+          var used = semesterCreditsSum(SUMMER_SEM_KEY);
+          var left = Math.max(0, SUMMER_MAX_CREDITS - used);
+          inp.max = left > 0 ? Math.min(12, left) : 0;
+        } else {
+          inp.max = 12;
+        }
+      }
+
+      function defaultUiPrefs() {
+        return {
+          schedulePrompt: "",
+          useSummer: true,
+          hoursPerRegularSem: 16,
+          summerMaxRequest: 10,
+          extraNotes: "",
+        };
+      }
+
+      function mergeUiPrefs(raw) {
+        var d = defaultUiPrefs();
+        if (!raw || typeof raw !== "object") return d;
+        if (typeof raw.schedulePrompt === "string")
+          d.schedulePrompt = raw.schedulePrompt;
+        if (typeof raw.useSummer === "boolean") d.useSummer = raw.useSummer;
+        var h = parseInt(raw.hoursPerRegularSem, 10);
+        if (!Number.isNaN(h) && h >= 6 && h <= 22) d.hoursPerRegularSem = h;
+        var sm = parseInt(raw.summerMaxRequest, 10);
+        if (!Number.isNaN(sm) && sm >= 1 && sm <= 10) d.summerMaxRequest = sm;
+        if (typeof raw.extraNotes === "string") d.extraNotes = raw.extraNotes;
+        return d;
+      }
+
+      function snapshotUiPrefsFromDom() {
+        if (!planState.uiPrefs) planState.uiPrefs = defaultUiPrefs();
+        var sp = document.getElementById("aiSchedulePrompt");
+        var us = document.getElementById("aiUseSummer");
+        var hr = document.getElementById("aiHoursPerRegularSem");
+        var sm = document.getElementById("aiSummerMaxHours");
+        var ex = document.getElementById("aiExtraNotes");
+        if (sp) planState.uiPrefs.schedulePrompt = sp.value;
+        if (us) planState.uiPrefs.useSummer = us.checked;
+        if (hr) {
+          var h = parseInt(hr.value, 10);
+          planState.uiPrefs.hoursPerRegularSem =
+            !Number.isNaN(h) && h >= 6 && h <= 22 ? h : 16;
+        }
+        if (sm) {
+          var m = parseInt(sm.value, 10);
+          planState.uiPrefs.summerMaxRequest =
+            !Number.isNaN(m) && m >= 1 && m <= 10 ? m : 10;
+        }
+        if (ex) planState.uiPrefs.extraNotes = ex.value;
+      }
+
+      function restoreUiPrefsToDom() {
+        var u = mergeUiPrefs(planState.uiPrefs);
+        planState.uiPrefs = u;
+        var sp = document.getElementById("aiSchedulePrompt");
+        var us = document.getElementById("aiUseSummer");
+        var hr = document.getElementById("aiHoursPerRegularSem");
+        var sm = document.getElementById("aiSummerMaxHours");
+        var ex = document.getElementById("aiExtraNotes");
+        if (sp) sp.value = u.schedulePrompt || "";
+        if (us) us.checked = u.useSummer !== false;
+        if (hr) hr.value = String(u.hoursPerRegularSem);
+        if (sm) sm.value = String(u.summerMaxRequest);
+        if (ex) ex.value = u.extraNotes || "";
+        syncSummerHoursWrap();
+      }
+
+      function syncSummerHoursWrap() {
+        var us = document.getElementById("aiUseSummer");
+        var wrap = document.getElementById("summerHoursWrap");
+        if (!us || !wrap) return;
+        wrap.style.display = us.checked ? "inline-flex" : "none";
+      }
+
+      function readSchedulePreferencesFromDom() {
+        var useSummerEl = document.getElementById("aiUseSummer");
+        var useSummer = useSummerEl ? useSummerEl.checked : true;
+        var hrEl = document.getElementById("aiHoursPerRegularSem");
+        var hrs = parseInt(hrEl && hrEl.value, 10);
+        if (Number.isNaN(hrs) || hrs < 6) hrs = 16;
+        if (hrs > 22) hrs = 22;
+        var smEl = document.getElementById("aiSummerMaxHours");
+        var sm = parseInt(smEl && smEl.value, 10);
+        if (Number.isNaN(sm) || sm < 1) sm = 10;
+        if (sm > 10) sm = 10;
+        var spEl = document.getElementById("aiSchedulePrompt");
+        return {
+          student_schedule_prompt: ((spEl && spEl.value) || "").trim(),
+          use_summer_semester_in_plan: useSummer,
+          target_credits_per_regular_semester: hrs,
+          summer_max_credits_if_used: useSummer ? sm : 0,
+        };
+      }
+
+      function effectiveSummerCapForMerge() {
+        var p = readSchedulePreferencesFromDom();
+        if (!p.use_summer_semester_in_plan) return 0;
+        return Math.min(SUMMER_MAX_CREDITS, p.summer_max_credits_if_used || 10);
+      }
+
+      let planState = {
+        programId: DEFAULT_PROGRAM_ID,
+        semesters: {},
+        semesterLabels: {},
+        uiPrefs: defaultUiPrefs(),
+      };
+      var _courseId = 1;
+
+      function loadPlanState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            const o = JSON.parse(raw);
+            if (o.programId) planState.programId = o.programId;
+            if (o.semesters && typeof o.semesters === "object") {
+              planState.semesters = o.semesters;
+            }
+            if (o.semesterLabels && typeof o.semesterLabels === "object") {
+              planState.semesterLabels = o.semesterLabels;
+            }
+            if (o.uiPrefs && typeof o.uiPrefs === "object") {
+              planState.uiPrefs = mergeUiPrefs(o.uiPrefs);
+            }
+          }
+        } catch (e) {}
+        if (
+          !PROGRAMS.some(function (x) {
+            return x.id === planState.programId;
+          })
+        ) {
+          planState.programId = DEFAULT_PROGRAM_ID;
+        }
+        if (!planState.uiPrefs) planState.uiPrefs = defaultUiPrefs();
+        ensureSemesterStateShape();
+        document.getElementById("programSelect").value = planState.programId;
+        defaultSemesterKeys().forEach(function (key) {
+          (planState.semesters[key] || []).forEach(function (c) {
+            if (c._id == null) c._id = _courseId++;
+          });
+        });
+        restoreUiPrefsToDom();
+      }
+
+      function savePlanState() {
+        planState.programId = document.getElementById("programSelect").value;
+        snapshotUiPrefsFromDom();
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(planState));
+        } catch (e) {}
+      }
+
+      function buildSemesterUi() {
+        ensureSemesterStateShape();
+        var keys = defaultSemesterKeys();
+        const sp = document.getElementById("semesterPick");
+        sp.innerHTML = "";
+        keys.forEach(function (key) {
+          var lab = planState.semesterLabels[key] || key;
+          sp.innerHTML +=
+            '<option value="' + key + '">' + escapeHtml(lab) + "</option>";
+        });
+        refreshCreditInputMaxForSem();
+
+        const grid = document.getElementById("semGrid");
+        grid.innerHTML = "";
+        keys.forEach(function (key) {
+          var courses = planState.semesters[key] || [];
+          const card = document.createElement("div");
+          card.className =
+            "sem-card" + (key === SUMMER_SEM_KEY ? " sem-card--summer" : "");
+
+          var head = document.createElement("div");
+          head.className = "sem-card-head";
+          var inpLabel = document.createElement("input");
+          inpLabel.type = "text";
+          inpLabel.className = "sem-label-input";
+          inpLabel.setAttribute("aria-label", "Semester name");
+          inpLabel.value = planState.semesterLabels[key] || key;
+          inpLabel.addEventListener("change", function () {
+            var v2 = (inpLabel.value || "").trim();
+            planState.semesterLabels[key] =
+              v2 || defaultSemesterLabelsObject()[key];
+            savePlanState();
+            buildSemesterUi();
+          });
+          var btnClearOne = document.createElement("button");
+          btnClearOne.type = "button";
+          btnClearOne.className = "btn-clear-sem";
+          btnClearOne.textContent = "Clear this semester";
+          (function (semKey) {
+            btnClearOne.addEventListener("click", function (ev) {
+              ev.preventDefault();
+              var label = planState.semesterLabels[semKey] || semKey;
+              if (!confirm("Remove all courses from \"" + label + "\" in your local draft?"))
+                return;
+              planState.semesters[semKey] = [];
+              savePlanState();
+              buildSemesterUi();
+            });
+          })(key);
+          head.appendChild(inpLabel);
+          head.appendChild(btnClearOne);
+
+          var meta = document.createElement("div");
+          meta.className = "sem-meta";
+          var sumCr = semesterCreditsSum(key);
+          if (key === SUMMER_SEM_KEY) {
+            meta.textContent =
+              sumCr +
+              " / " +
+              SUMMER_MAX_CREDITS +
+              " credits (summer cap)";
+          } else {
+            meta.textContent = sumCr + " credits this semester";
+          }
+
+          var wrapTop = document.createElement("div");
+          wrapTop.appendChild(head);
+          wrapTop.appendChild(meta);
+
+          var holder = document.createElement("div");
+          holder.className = "sem-courses";
+          holder.dataset.sem = key;
+          courses.forEach(function (c) {
+            holder.appendChild(renderPill(key, c));
+          });
+          card.appendChild(wrapTop);
+          card.appendChild(holder);
+          grid.appendChild(card);
+        });
+        updateTotals();
+      }
+
+      function kindShortLabel(kind) {
+        if (kind === "elective") return "Elective";
+        if (kind === "graduation") return "Graduation";
+        return "";
+      }
+
+      function renderPill(semKey, c) {
+        var wrap = document.createElement("span");
+        wrap.className = "course-pill-wrap";
+        var btnX = document.createElement("button");
+        btnX.type = "button";
+        btnX.className = "course-pill-x";
+        btnX.setAttribute("aria-label", "Remove course");
+        btnX.textContent = "×";
+        var cid = c._id;
+        btnX.addEventListener("click", function (e) {
+          e.stopPropagation();
+          planState.semesters[semKey] = planState.semesters[semKey].filter(
+            function (x) {
+              return x._id !== cid;
+            },
+          );
+          savePlanState();
+          buildSemesterUi();
+        });
+        var body = document.createElement("span");
+        body.className = "course-pill-body course-pill";
+        var line = (c.code || "") + " (" + (Number(c.cr) || 0) + " cr)";
+        if (c.titleAr) line += " — " + c.titleAr;
+        var k = kindShortLabel(c.kind);
+        if (k) line += " [" + k + "]";
+        body.textContent = line;
+        body.title = "Click to edit code, credits, title, and type";
+        body.addEventListener("click", function () {
+          var newCode = prompt("Course code (letters/numbers):", c.code || "");
+          if (newCode === null) return;
+          newCode = String(newCode).trim().toUpperCase();
+          if (!newCode) return;
+          var newCrStr = prompt("Credits:", String(Number(c.cr) || 0));
+          if (newCrStr === null) return;
+          var newCr = parseInt(newCrStr, 10);
+          if (Number.isNaN(newCr) || newCr < 0) return;
+          var others = semesterCreditsSum(semKey) - (Number(c.cr) || 0);
+          if (
+            semKey === SUMMER_SEM_KEY &&
+            others + newCr > SUMMER_MAX_CREDITS
+          ) {
+            alert(
+              "Summer term: total credits cannot exceed " +
+                SUMMER_MAX_CREDITS +
+                ".",
+            );
+            return;
+          }
+          var newTitle = prompt(
+            "Course title (optional; leave empty to clear):",
+            c.titleAr || "",
+          );
+          if (newTitle === null) return;
+          var t = String(newTitle).trim();
+          var kindHint =
+            c.kind === "elective"
+              ? "elective"
+              : c.kind === "graduation"
+                ? "graduation"
+                : "regular";
+          var newKind = prompt(
+            "Course type — type: regular, elective, or graduation",
+            kindHint,
+          );
+          if (newKind === null) return;
+          var ki = String(newKind).trim().toLowerCase();
+          c.code = newCode;
+          c.cr = newCr;
+          if (t) c.titleAr = t;
+          else delete c.titleAr;
+          if (ki.indexOf("elect") >= 0 || ki.indexOf("اخت") >= 0)
+            c.kind = "elective";
+          else if (ki.indexOf("grad") >= 0 || ki.indexOf("تخر") >= 0)
+            c.kind = "graduation";
+          else c.kind = "regular";
+          savePlanState();
+          buildSemesterUi();
+        });
+        wrap.appendChild(btnX);
+        wrap.appendChild(body);
+        return wrap;
+      }
+
+      function updateTotals() {
+        var total = 0;
+        var n = 0;
+        defaultSemesterKeys().forEach(function (k) {
+          (planState.semesters[k] || []).forEach(function (c) {
+            total += Number(c.cr) || 0;
+            n++;
+          });
+        });
+        document.getElementById("totalCredits").textContent = total;
+        document.getElementById("courseCount").textContent = n;
+      }
+
+      function planExportRows() {
+        ensureSemesterStateShape();
+        var rows = [];
+        defaultSemesterKeys().forEach(function (key) {
+          var label = planState.semesterLabels[key] || key;
+          (planState.semesters[key] || []).forEach(function (c) {
+            rows.push({
+              semester: label,
+              code: c.code || "",
+              title: c.titleAr || c.title || "",
+              credits: Number(c.cr) || 0,
+              kind: c.kind || "regular",
+            });
+          });
+        });
+        return rows;
+      }
+
+      function buildPlanExportElement() {
+        var p = getSelectedProgram();
+        if (!p) return null;
+        var rows = planExportRows();
+        if (!rows.length) return null;
+
+        var totalCr = 0;
+        rows.forEach(function (r) {
+          totalCr += r.credits;
+        });
+        var planUrl = officialStudyPlanPdfUrl(p) || "";
+        var dateStr = new Date().toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+
+        var wrap = document.createElement("div");
+        wrap.className = "plan-pdf-export";
+
+        var head =
+          '<header class="plan-pdf-header">' +
+          '<h1>JUST — Study Plan</h1>' +
+          "<p class=\"plan-pdf-program\"><strong>Program:</strong> " +
+          escapeHtml(p.nameEn || p.nameAr) +
+          "</p>";
+        if (p.resourceKey) {
+          head +=
+            "<p><strong>Official plan:</strong> " +
+            escapeHtml(p.resourceKey.replace(/_/g, " ")) +
+            "</p>";
+        }
+        head +=
+          "<p><strong>Generated:</strong> " +
+          escapeHtml(dateStr) +
+          "</p>";
+        if (planUrl) {
+          head +=
+            '<p class="plan-pdf-url"><strong>Official PDF:</strong> ' +
+            escapeHtml(planUrl) +
+            "</p>";
+        }
+        head += "</header>";
+
+        var table =
+          '<table class="plan-pdf-table">' +
+          "<thead><tr>" +
+          "<th>Semester</th><th>Code</th><th>Title</th><th>Credits</th><th>Type</th>" +
+          "</tr></thead><tbody>";
+        rows.forEach(function (r) {
+          table +=
+            "<tr><td>" +
+            escapeHtml(r.semester) +
+            "</td><td>" +
+            escapeHtml(r.code) +
+            "</td><td>" +
+            escapeHtml(r.title) +
+            "</td><td>" +
+            r.credits +
+            "</td><td>" +
+            escapeHtml(r.kind) +
+            "</td></tr>";
+        });
+        table += "</tbody></table>";
+
+        var foot =
+          '<footer class="plan-pdf-footer">' +
+          "<p><strong>Total courses:</strong> " +
+          rows.length +
+          " &nbsp;|&nbsp; <strong>Total credits:</strong> " +
+          totalCr +
+          "</p>" +
+          "<p class=\"plan-pdf-note\">Advisory draft only — confirm registration with your department and academic advisor.</p>" +
+          "</footer>";
+
+        wrap.innerHTML = head + table + foot;
+        return wrap;
+      }
+
+      function savePlanAsPdf() {
+        var el = buildPlanExportElement();
+        if (!el) {
+          alert("Add courses to the semester grid before saving a PDF.");
+          return;
+        }
+
+        var host = document.getElementById("planPdfExportHost");
+        host.innerHTML = "";
+        host.appendChild(el);
+
+        var p = getSelectedProgram();
+        var filename =
+          "JUST-" +
+          (p && p.id ? p.id : "plan") +
+          "-study-plan-" +
+          new Date().toISOString().slice(0, 10) +
+          ".pdf";
+
+        var btn = document.getElementById("btnPrintPlan");
+        var oldText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = "Generating PDF…";
+
+        function finish() {
+          host.innerHTML = "";
+          btn.disabled = false;
+          btn.textContent = oldText;
+        }
+
+        if (typeof html2pdf === "undefined") {
+          document.body.classList.add("plan-print-mode");
+          window.print();
+          setTimeout(function () {
+            document.body.classList.remove("plan-print-mode");
+            finish();
+          }, 500);
+          return;
+        }
+
+        html2pdf()
+          .set({
+            margin: [12, 10, 12, 10],
+            filename: filename,
+            image: { type: "jpeg", quality: 0.96 },
+            html2canvas: { scale: 2, useCORS: true, logging: false },
+            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+            pagebreak: { mode: ["css", "legacy"] },
+          })
+          .from(el)
+          .save()
+          .then(finish)
+          .catch(function (err) {
+            console.error("PDF export failed:", err);
+            alert(
+              'PDF download failed. Use your browser print dialog and choose "Save as PDF".',
+            );
+            document.body.classList.add("plan-print-mode");
+            window.print();
+            setTimeout(function () {
+              document.body.classList.remove("plan-print-mode");
+              finish();
+            }, 500);
+          });
+      }
+
+      window.__lastPlannerAiText = "";
+
+      function buildPlannerContext(mode) {
+        var p = getSelectedProgram();
+        if (!p) return null;
+        ensureSemesterStateShape();
+        var pdfUrl = officialStudyPlanPdfUrl(p) || null;
+        if (!pdfUrl) {
+          alert(
+            "Official study plan PDF is not available for this major. Check resources.json and reload the page.",
+          );
+          return null;
+        }
+        var ctx = {
+          mode: mode,
+          program: {
+            id: p.id,
+            name_ar: p.nameAr,
+            name_en: p.nameEn,
+            resource_key: p.resourceKey,
+            plan_pdf_url: pdfUrl,
+            plan_url: pdfUrl,
+            typical_credits: p.typicalCredits,
+          },
+          semester_setup: {
+            semester_keys: defaultSemesterKeys(),
+            semester_labels: planState.semesterLabels,
+            summer_semester_key: SUMMER_SEM_KEY,
+            summer_max_credits: SUMMER_MAX_CREDITS,
+          },
+          profile: {
+            completed_hours:
+              parseInt(document.getElementById("aiCompletedHours").value, 10) ||
+              0,
+            target_hours:
+              parseInt(document.getElementById("aiTargetHours").value, 10) ||
+              p.typicalCredits,
+            graduation_years: parseFloat(
+              String(document.getElementById("aiYears").value || "4"),
+            ),
+            notes: (document.getElementById("aiExtraNotes").value || "").trim(),
+          },
+          schedule_preferences: readSchedulePreferencesFromDom(),
+        };
+        if (mode === "assist_current") {
+          ctx.current_plan = planState.semesters;
+        }
+        return ctx;
+      }
+
+      function plannerUserQueryText() {
+        var prefs = readSchedulePreferencesFromDom();
+        var parts = [];
+        parts.push(
+          "Propose an advisory course plan for the student in English. Use ONLY course codes and titles from official_study_plan in the JSON when available=true. Follow program, profile, schedule_preferences, and prerequisite order:",
+        );
+        parts.push(
+          "- For regular semesters (sem 1 through 8): aim for about " +
+            prefs.target_credits_per_regular_semester +
+            " credits per semester unless earlier requirements clearly force a different split.",
+        );
+        if (prefs.use_summer_semester_in_plan) {
+          parts.push(
+            '- Summer is allowed: use sem 9 or the string "summer", with at most ' +
+              prefs.summer_max_credits_if_used +
+              " total summer credits inside PLAN_JSON.",
+          );
+        } else {
+          parts.push(
+            '- Do not use summer: do not place any course in sem 9 or "summer" inside PLAN_JSON.',
+          );
+        }
+        if (prefs.student_schedule_prompt) {
+          parts.push(
+            "--- Student schedule request ---\n" + prefs.student_schedule_prompt,
+          );
+        }
+        var extra = (
+          document.getElementById("aiExtraNotes").value || ""
+        ).trim();
+        if (extra) {
+          parts.push("--- Extra notes ---\n" + extra);
+        }
+        parts.push(
+          "Then follow the reply format (Markdown + PLAN_JSON_START / PLAN_JSON_END) as in the system instructions.",
+        );
+        return parts.join("\n\n");
+      }
+
+      function semesterKeyFromAiSem(semRaw) {
+        if (semRaw === null || semRaw === undefined) return null;
+        if (typeof semRaw === "string") {
+          var t = String(semRaw).trim().toLowerCase();
+          if (t === "summer" || t === "صيفي" || t === "s9") {
+            return SUMMER_SEM_KEY;
+          }
+        }
+        var n = parseInt(semRaw, 10);
+        if (n === 9) return SUMMER_SEM_KEY;
+        if (!Number.isNaN(n) && n >= 1 && n <= DEFAULT_REGULAR_SEMESTER_COUNT) {
+          return "s" + n;
+        }
+        return null;
+      }
+
+      function applyParsedPlanToGrid(text) {
+        var m = text.match(/PLAN_JSON_START\s*([\s\S]*?)\s*PLAN_JSON_END/i);
+        if (!m) {
+          alert(
+            "No mergeable course block was found in the latest reply. Generate a new suggestion or add courses manually.",
+          );
+          return;
+        }
+        var raw = m[1].trim();
+        var arr;
+        try {
+          arr = JSON.parse(raw);
+        } catch (e) {
+          alert("Could not read the suggestion from the reply. Try generating a new one.");
+          return;
+        }
+        if (!Array.isArray(arr) || !arr.length) {
+          alert("The suggestion is empty.");
+          return;
+        }
+        ensureSemesterStateShape();
+        defaultSemesterKeys().forEach(function (ky) {
+          planState.semesters[ky] = [];
+        });
+        var summerCap = effectiveSummerCapForMerge();
+        var merged = 0;
+        var summerSkipped = 0;
+        var summerRunning = 0;
+        arr.forEach(function (row) {
+          var key = semesterKeyFromAiSem(row.sem);
+          var code = (row.code || "").toString().trim().toUpperCase();
+          var cr = parseInt(row.cr, 10) || 0;
+          if (!key || !code) return;
+          if (key === SUMMER_SEM_KEY) {
+            if (summerCap <= 0) {
+              summerSkipped++;
+              return;
+            }
+            if (summerRunning + cr > summerCap) {
+              summerSkipped++;
+              return;
+            }
+            summerRunning += cr;
+          }
+          var rec = {
+            _id: _courseId++,
+            code: code,
+            cr: cr,
+          };
+          var titleAr = row.title_ar || row.titleAr || row.title;
+          if (titleAr) rec.titleAr = String(titleAr).trim();
+          var rk = row.kind;
+          if (rk === "elective" || rk === "graduation") rec.kind = rk;
+          planState.semesters[key].push(rec);
+          merged++;
+        });
+        savePlanState();
+        buildSemesterUi();
+        var msg =
+          "Merged " + merged + " course(s) into the grid (previous contents replaced).";
+        if (summerSkipped) {
+          msg += " Skipped " + summerSkipped + " course(s) from the reply (summer: ";
+          msg +=
+            summerCap <= 0
+              ? "disabled in your settings)."
+              : "credit cap " + summerCap + ").";
+        }
+        alert(msg);
+      }
+
+      async function sendPlannerStream(query, plannerContext) {
+        const loadingEl = document.getElementById("plannerAiLoading");
+        const responseSection = document.getElementById("plannerAiResponse");
+        const answerBox = document.getElementById("plannerAnswerBox");
+        const jsonBox = document.getElementById("plannerJsonBox");
+        const streamTargetEl = answerBox;
+        answerBox.innerHTML = "";
+        if (jsonBox) jsonBox.textContent = "";
+        responseSection.classList.remove("show");
+        loadingEl.classList.add("active");
+        var pjw = document.getElementById("plannerJsonWrap");
+        if (pjw) pjw.classList.remove("show");
+
+        let fullAnswer = "";
+        const reqBody = { query: query || "", planner_context: plannerContext };
+
+        const streamHeaders = JUSTAuth.getToken()
+          ? JUSTAuth.authHeaders()
+          : { "Content-Type": "application/json" };
+
+        const response = await fetch(API_BASE + "/query/stream", {
+          method: "POST",
+          headers: streamHeaders,
+          body: JSON.stringify(reqBody),
+        });
+        if (!response.ok) {
+          const err = await response.json();
+          throw new Error(err.error || "Could not fetch the answer");
+        }
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split("\n\n");
+          buffer = lines.pop() || "";
+          for (const line of lines) {
+            if (line.startsWith("data: ")) {
+              try {
+                const data = JSON.parse(line.substring(6));
+                if (data.type === "metadata") {
+                  if (jsonBox && data.data && data.data.json != null) {
+                    try {
+                      jsonBox.textContent = JSON.stringify(
+                        data.data.json,
+                        null,
+                        2,
+                      );
+                    } catch (e) {}
+                  }
+                  responseSection.classList.add("show");
+                  loadingEl.classList.remove("active");
+                } else if (data.type === "chunk") {
+                  fullAnswer += data.content;
+                  streamTargetEl.innerHTML = renderMarkdown(fullAnswer);
+                  streamTargetEl.scrollTop = streamTargetEl.scrollHeight;
+                  loadingEl.classList.remove("active");
+                  responseSection.classList.add("show");
+                } else if (data.type === "error") {
+                  throw new Error(data.message);
+                }
+              } catch (e) {
+                if (e instanceof SyntaxError) continue;
+                throw e;
+              }
+            }
+          }
+        }
+        if (fullAnswer) {
+          streamTargetEl.innerHTML = renderMarkdown(fullAnswer);
+          window.__lastPlannerAiText = fullAnswer;
+        }
+        loadingEl.classList.remove("active");
+        if (fullAnswer) {
+          responseSection.classList.add("show");
+          if (fullAnswer.match(/PLAN_JSON_START\s*[\s\S]*?PLAN_JSON_END/i)) {
+            if (
+              confirm(
+                "Add the suggested courses from this reply to the semester grid now?",
+              )
+            ) {
+              applyParsedPlanToGrid(fullAnswer);
+            }
+          }
+        }
+      }
+
+      document
+        .getElementById("btnAddCourse")
+        .addEventListener("click", function () {
+          ensureSemesterStateShape();
+          var code = document
+            .getElementById("courseCode")
+            .value.trim()
+            .toUpperCase();
+          var cr =
+            parseInt(document.getElementById("courseCredits").value, 10) || 0;
+          var semKey = document.getElementById("semesterPick").value;
+          if (!code) {
+            alert("Enter a course code.");
+            return;
+          }
+          if (!planState.semesters[semKey]) planState.semesters[semKey] = [];
+          var tot = semesterCreditsSum(semKey) + cr;
+          if (semKey === SUMMER_SEM_KEY && tot > SUMMER_MAX_CREDITS) {
+            alert(
+              "Summer term: maximum credits allowed is " +
+                SUMMER_MAX_CREDITS +
+                ".",
+            );
+            return;
+          }
+          var titleAr = (
+            document.getElementById("courseTitle").value || ""
+          ).trim();
+          var kindEl = document.getElementById("courseKind");
+          var kind = (kindEl && kindEl.value) || "regular";
+          var rec = {
+            _id: _courseId++,
+            code: code,
+            cr: cr,
+            kind: kind,
+          };
+          if (titleAr) rec.titleAr = titleAr;
+          planState.semesters[semKey].push(rec);
+          document.getElementById("courseCode").value = "";
+          document.getElementById("courseTitle").value = "";
+          if (kindEl) kindEl.value = "regular";
+          savePlanState();
+          buildSemesterUi();
+        });
+
+      document
+        .getElementById("btnClearPlan")
+        .addEventListener("click", function () {
+          if (!confirm("Remove all courses from the saved draft?")) return;
+          ensureSemesterStateShape();
+          defaultSemesterKeys().forEach(function (ky) {
+            planState.semesters[ky] = [];
+          });
+          savePlanState();
+          buildSemesterUi();
+        });
+
+      document
+        .getElementById("btnPrintPlan")
+        .addEventListener("click", function () {
+          savePlanAsPdf();
+        });
+
+      document
+        .getElementById("btnAskFromPlan")
+        .addEventListener("click", function () {
+          var pid = document.getElementById("programSelect").value;
+          var p = PROGRAMS.find(function (x) {
+            return x.id === pid;
+          });
+          var q =
+            "Summarize key graduation requirements and course registration tips for " +
+            (p.nameEn || p.nameAr) +
+            " at Jordan University of Science and Technology, referencing the official study plan.";
+          window.location.href = "/assistant.html?q=" + encodeURIComponent(q);
+        });
+
+      document
+        .getElementById("btnAiFullPlan")
+        .addEventListener("click", function () {
+          snapshotUiPrefsFromDom();
+          var mainPrompt = (
+            document.getElementById("aiSchedulePrompt").value || ""
+          ).trim();
+          if (!mainPrompt) {
+            if (
+              !confirm(
+                "You did not describe the schedule in the first box. Continue with a more generic suggestion?",
+              )
+            ) {
+              return;
+            }
+          }
+          var ctx = buildPlannerContext("full_plan");
+          if (!ctx) {
+            alert("Choose an academic program first (step 1).");
+            return;
+          }
+          sendPlannerStream(plannerUserQueryText(), ctx).catch(function (err) {
+            alert(err.message || String(err));
+            document
+              .getElementById("plannerAiLoading")
+              .classList.remove("active");
+          });
+        });
+
+      document
+        .getElementById("btnAiAssistPlan")
+        .addEventListener("click", function () {
+          snapshotUiPrefsFromDom();
+          var ctx = buildPlannerContext("assist_current");
+          if (!ctx) {
+            alert("Choose an academic program first (step 1).");
+            return;
+          }
+          sendPlannerStream(plannerUserQueryText(), ctx).catch(function (err) {
+            alert(err.message || String(err));
+            document
+              .getElementById("plannerAiLoading")
+              .classList.remove("active");
+          });
+        });
+
+      document
+        .getElementById("btnApplyAiJson")
+        .addEventListener("click", function () {
+          applyParsedPlanToGrid(window.__lastPlannerAiText || "");
+        });
+
+      window.onload = async function () {
+        setAuthPageLinks();
+        wireHeaderAuth();
+        refreshAuthUi();
+        checkHealth();
+        await loadStudyPlanPdfsFromServer();
+        fillProgramSelect();
+        loadPlanState();
+        updateProgramUi();
+        buildSemesterUi();
+        document
+          .getElementById("semesterPick")
+          .addEventListener("change", refreshCreditInputMaxForSem);
+        var us = document.getElementById("aiUseSummer");
+        if (us) {
+          us.addEventListener("change", function () {
+            syncSummerHoursWrap();
+            savePlanState();
+          });
+        }
+        [
+          "aiSchedulePrompt",
+          "aiHoursPerRegularSem",
+          "aiSummerMaxHours",
+          "aiExtraNotes",
+        ].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (!el) return;
+          el.addEventListener("blur", function () {
+            savePlanState();
+          });
+        });
+      };
+    </script>
+  </body>
+</html>
