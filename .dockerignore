@@ -1,0 +1,44 @@
+# Git / IDE
+.git
+.gitignore
+.cursor
+**/.cursor
+
+# Python
+__pycache__
+**/__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv
+.venv
+ENV
+env
+*.egg-info
+.eggs
+dist
+build
+
+# Secrets and local data (never ship in image)
+.env
+.env.*
+!.env.example
+instance/*.db
+
+# Logs and caches
+*.log
+logs
+.pytest_cache
+.coverage
+htmlcov
+
+# Scratch / OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Docs / misc (optional; remove lines if you need them in the image)
+*.md
